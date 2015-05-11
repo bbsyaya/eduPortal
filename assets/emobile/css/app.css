@@ -1,0 +1,248 @@
+/* app css stylesheet */
+
+body {
+    margin: 0 auto 0 auto;
+    background-color: white;
+}
+
+.phones {
+    list-style: none;
+}
+
+.thumb {
+    float: left;
+    margin: -0.5em 1em 1.5em 0;
+    padding-bottom: 1em;
+    height: 100px;
+    width: 100px;
+}
+
+.phones li {
+    clear: both;
+    height: 115px;
+    padding-top: 15px;
+}
+
+/** Detail View **/
+img.phone {
+    float: left;
+    border: 1px solid black;
+    margin-right: 3em;
+    margin-bottom: 2em;
+    background-color: white;
+    padding: 2em;
+    height: 400px;
+    width: 400px;
+}
+
+ul.phone-thumbs {
+    margin: 0;
+    list-style: none;
+}
+
+ul.phone-thumbs li {
+    border: 1px solid black;
+    display: inline-block;
+    margin: 1em;
+    background-color: white;
+}
+
+ul.phone-thumbs img {
+    height: 100px;
+    width: 100px;
+    padding: 1em;
+}
+
+ul.specs {
+    clear: both;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+ul.specs > li {
+    display: inline-block;
+    width: 200px;
+    vertical-align: top;
+}
+
+ul.specs > li > span {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+ul.specs dt {
+    font-weight: bold;
+}
+
+h1 {
+    border-bottom: 1px solid gray;
+}
+
+.edu_title {
+    position: relative;
+    background-color: #239d0f;
+    height: 40px;
+    line-height: 40px;
+    opacity: 0.7;
+    text-align: center;
+    color: #ffffff;
+    font-size: 18px;
+}
+
+#home_menue_table td {
+    text-align:center;
+}
+
+.splash_img{
+    background-image: url("../imgs/splash1.png");
+    background-repeat: no-repeat;
+    filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+    -moz-background-size:100% 100%;
+    background-size:100% 100%;
+}
+
+.setting_img{
+    background-image: url("../imgs/logo_setting.jpg");
+    background-repeat: no-repeat;
+    filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+    -moz-background-size:100% 100%;
+    background-size:100% 100%;
+}
+
+.personal_img{
+    background-image: url("../imgs/logo_personal.jpg");
+    background-repeat: no-repeat;
+    filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+    -moz-background-size:100% 100%;
+    background-size:100% 100%;
+}
+
+#home_menu_contact{
+    background-image: url("../imgs/menu_contact_us.png");
+    background-repeat: no-repeat;
+    filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+    -moz-background-size:100% 100%;
+    background-size:100% 100%;
+}
+
+#home_menu_gps{
+    background-image: url("../imgs/menu_gps.png");
+    background-repeat: no-repeat;
+    filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+    -moz-background-size:100% 100%;
+    background-size:100% 100%;
+}
+
+#home_menu_convenience{
+    background-image: url("../imgs/menu_convenience.png");
+    background-repeat: no-repeat;
+    filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+    -moz-background-size:100% 100%;
+    background-size:100% 100%;
+}
+
+#home_menu_school{
+    background-image: url("../imgs/menu_school.png");
+    background-repeat: no-repeat;
+    filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+    -moz-background-size:100% 100%;
+    background-size:100% 100%;
+}
+
+#home_menu_emergency{
+    background-image: url("../imgs/menu_emergency.png");
+    background-repeat: no-repeat;
+    filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+    -moz-background-size:100% 100%;
+    background-size:100% 100%;
+}
+
+#home_menu_teacher{
+    background-image: url("../imgs/menu_teacher.png");
+    background-repeat: no-repeat;
+    filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+    -moz-background-size:100% 100%;
+    background-size:100% 100%;
+}
+
+#home_menu_aboard{
+    background-image: url("../imgs/menu_aboard.png");
+    background-repeat: no-repeat;
+    filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+    -moz-background-size:100% 100%;
+    background-size:100% 100%;
+}
+
+#home_menu_activity{
+    background-image: url("../imgs/menu_activity.png");
+    background-repeat: no-repeat;
+    filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+    -moz-background-size:100% 100%;
+    background-size:100% 100%;
+}
+
+#home_menu_personal{
+    background-image: url("../imgs/menu_personal.png");
+    background-repeat: no-repeat;
+    filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+    -moz-background-size:100% 100%;
+    background-size:100% 100%;
+}
+/*个人中心*/
+#home_menu_schoolNews{
+    background-image: url("../imgs/myschool.png");
+    background-repeat: no-repeat;
+    filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+    -moz-background-size:100% 100%;
+    background-size:100% 100%;
+}
+
+#home_menu_guardian{
+    background-image: url("../imgs/guardian.png");
+    background-repeat: no-repeat;
+    filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+    -moz-background-size:100% 100%;
+    background-size:100% 100%;
+}
+
+#home_menu_report{
+    background-image: url("../imgs/report.png");
+    background-repeat: no-repeat;
+    filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+    -moz-background-size:100% 100%;
+    background-size:100% 100%;
+}
+
+
+#home_menu_customization{
+    background-image: url("../imgs/customization.png");
+    background-repeat: no-repeat;
+    filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+    -moz-background-size:100% 100%;
+    background-size:100% 100%;
+}
+
+#home_menu_sister{
+    background-image: url("../imgs/sister.png");
+    background-repeat: no-repeat;
+    filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+    -moz-background-size:100% 100%;
+    background-size:100% 100%;
+}
+
+#home_menu_reply{
+    background-image: url("../imgs/reply.png");
+    background-repeat: no-repeat;
+    filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+    -moz-background-size:100% 100%;
+    background-size:100% 100%;
+}
+
+#gps_logo{
+    background-image: url("../imgs/logo_gps.jpg");
+    background-repeat: no-repeat;
+    filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+    -moz-background-size:100% 100%;
+    background-size:100% 100%;
+}

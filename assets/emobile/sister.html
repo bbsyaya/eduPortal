@@ -1,0 +1,55 @@
+<div class="navbar navbar-app navbar-absolute-top edu_title">
+    <div class="navbar-brand navbar-brand-center" style="width:100%;text-align:center;">
+        知心姐姐
+    </div>
+    <div style="position:absolute;height:100%;" ng-click="back()">
+        <table height=100%>
+            <tr>
+                <td style="color:white;padding-left: 20px;" >
+                    <img src="emobile/imgs/back.png" class="back_arrow" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="scrollable" style="position: absolute;padding-top:50px;">
+
+    <div class="scrollable-content">
+        <div class="list-group">
+            <a ng-repeat="sister in sisters" href="#/detail/{{ sister.id }}" class="list-group-item">
+
+			<span >
+				<table height=100%>
+                    <tr>
+                        <td><img src="{{ sister.img }}" width="80px" height="80px"/>&nbsp;&nbsp;</td>
+                        <td>
+                            <table border=0 height=100%>
+                                <tr>
+                                    <!--名称-->
+                                    <td>
+                                        {{sister.name}}
+                                        <!--性别图片-->
+                                        <img src="emobile/imgs/icon_female.png" width="20" height="20" style="margin-left: 10px;" />
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td height=5px></td>
+                                </tr>
+
+                                <tr>
+                                    <td>{{sister.summary}}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+			</span>
+            </a>
+        </div>
+    </div>
+
+
+</div>
+
+	
