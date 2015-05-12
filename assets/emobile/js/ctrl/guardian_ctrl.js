@@ -37,17 +37,7 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
     }
   }
 
-	//$http.get('/edu/f/edu/schoolNews/get?id='+$routeParams.id).
-	//  success(function(data, status, headers, config) {
-	//    $scope.schoolNews = data;
-	//
-  //}).
-  //error(function(data, status, headers, config) {
-  //  // called asynchronously if an error occurs
-  //  // or server returns response with an error status.
-  //});
-  
-  $scope.deliberatelyTrustDangerousSnippet = function() {  
+    $scope.deliberatelyTrustDangerousSnippet = function() {
 	return $sce.trustAsHtml($scope.snippet);  
   };  
   
@@ -59,18 +49,18 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
 
 
 app.controller('guardianController', function($rootScope, $scope,$http,$location){
-  Cookies.json = true;
-  if(Cookies.get("login")==true){
-    $scope.user = Cookies.get("user");
-    $scope.guardian = Cookies.get("guardian");
+  //Cookies.json = true;
+  //if(Cookies.get("login")==true){
+  //
+  //}else{
+  //  $location.path("/login")
+  //}
+    $scope.user =   JSON.parse(localStorage.getItem('user'));
+    $scope.guardian = JSON.parse(localStorage.getItem('guardian'));
     if($scope.guardian == undefined){
-      alert('您没有监护人');
-      return;
+        alert('您没有监护人');
+        return;
     }
-  }else{
-    $location.path("/login")
-  }
-
 
   $scope.back = function(){
     	window.history.go(-1);
@@ -88,40 +78,7 @@ app.controller('guardianController', function($rootScope, $scope,$http,$location
       return
     }
 
-    $http.get('/edu/f/edu/account/login?loginName='+$scope.loginName+'&password='+$scope.password).
-        success(function(data, status, headers, config) {
-          $scope.login_rs = data;
-          if($scope.login_rs.rs==true){
-            //存储用户信息
-            Cookies.json = true;
-            Cookies.set('login', true, { path: '/'});
-            Cookies.set('user', $scope.login_rs.euser, { path: '/'});
-            window.history.back();
-
-          }else{
-            alert("用户名或密码错误");
-            Cookies.put("login",false);
-          }
-
-        }).
-        error(function(data, status, headers, config) {
-          alert("登录失败")
-        });
-  };
-
-  $scope.login = function(){
-
-    if($scope.loginName==undefined || $scope.loginName==""){
-      alert("请输入用户名");
-      return
-    }
-
-    if($scope.password==undefined || $scope.password==""){
-      alert("请输入密码");
-      return
-    }
-
-    $http.get('/edu/f/edu/account/login?loginName='+$scope.loginName+'&password='+$scope.password).
+    $http.get('http://adminapp.online-openday.com/f/edu/account/login?loginName='+$scope.loginName+'&password='+$scope.password).
         success(function(data, status, headers, config) {
           $scope.login_rs = data;
           if($scope.login_rs.rs==true){
@@ -147,29 +104,23 @@ app.controller('guardianController', function($rootScope, $scope,$http,$location
 
 app.controller('reportController', function($rootScope, $scope,$http,$location){
 
-  Cookies.json = true;
-  if(Cookies.get("login")==true){
-    $scope.user = Cookies.get("user");
-    $scope.guardian = Cookies.get("guardian");
+    $scope.user =   JSON.parse(localStorage.getItem('user'));
+    $scope.guardian = JSON.parse(localStorage.getItem('guardian'));
     if($scope.guardian == undefined){
-      alert('您没有监护人');
-      return;
+        alert('您没有监护人');
+        return;
     }else{
-      //读取报告列表
+        //读取报告列表
+        $http.get('http://adminapp.online-openday.com/f/edu/reportGuardian?uid='+$scope.guardian.id).
+            success(function(data, status, headers, config) {
+                $rootScope.reports = data;
 
-      $http.get('/edu/f/edu/reportGuardian?uid='+$scope.guardian.id).
-          success(function(data, status, headers, config) {
-            $rootScope.reports = data;
-
-          }).
-          error(function(data, status, headers, config) {
-            alert("获取失败")
-          });
+            }).
+            error(function(data, status, headers, config) {
+                alert("获取失败")
+            });
 
     }
-  }else{
-    $location.path("/login")
-  }
 
 
   $scope.back = function(){
@@ -188,7 +139,7 @@ app.controller('reportController', function($rootScope, $scope,$http,$location){
       return
     }
 
-    $http.get('/edu/f/edu/account/login?loginName='+$scope.loginName+'&password='+$scope.password).
+    $http.get('http://adminapp.online-openday.com/f/edu/account/login?loginName='+$scope.loginName+'&password='+$scope.password).
         success(function(data, status, headers, config) {
           $scope.login_rs = data;
           if($scope.login_rs.rs==true){
@@ -221,7 +172,7 @@ app.controller('reportController', function($rootScope, $scope,$http,$location){
       return
     }
 
-    $http.get('/edu/f/edu/account/login?loginName='+$scope.loginName+'&password='+$scope.password).
+    $http.get('http://adminapp.online-openday.com/f/edu/account/login?loginName='+$scope.loginName+'&password='+$scope.password).
         success(function(data, status, headers, config) {
           $scope.login_rs = data;
           if($scope.login_rs.rs==true){

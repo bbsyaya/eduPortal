@@ -16,7 +16,7 @@ app.config(function($routeProvider) {
 
 app.controller('customizationController', function($rootScope, $scope,$http,$routeParams,$location){
 
-	$http.get('/edu/f/edu/customization').
+	$http.get('http://adminapp.online-openday.com/f/edu/customization').
 	  success(function(data, status, headers, config) {
             $scope.customizations = data;
 
@@ -42,7 +42,7 @@ app.controller('msgController', function($rootScope, $scope,$http,$location){
             return;
         }
 
-        $http.get('/edu/f/edu/question/save?euser.id='+$scope.user.id+'&msg='+$scope.content+'&title='+$scope.title).
+        $http.get('http://adminapp.online-openday.com/f/edu/question/save?euser.id='+$scope.user.id+'&msg='+$scope.content+'&title='+$scope.title).
             success(function(data, status, headers, config) {
                 if(data==true){
                     alert("提交成功");

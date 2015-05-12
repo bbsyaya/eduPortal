@@ -22,11 +22,11 @@ app.config(function ($routeProvider) {
 app.controller('gpsController', function ($rootScope, $scope, $http,$location) {
 
     //定位当前位置
-    Cookies.json = true;
-    if (Cookies.get("login") == true) {//进行报名操作
-        $scope.user = Cookies.get("user");
 
-        $http.get('/edu/f/edu/gps?uid='+$scope.user.id).
+    if (localStorage.getItem("login") == 'true') {//进行报名操作
+        $scope.user = JSON.parse(localStorage.getItem('user'));
+
+        $http.get('http://adminapp.online-openday.com/f/edu/gps?uid='+$scope.user.id).
             success(function (data, status, headers, config) {
                 $scope.gpses = data;
 
@@ -43,7 +43,7 @@ app.controller('gpsController', function ($rootScope, $scope, $http,$location) {
     };
 
     //定位
-    $http.get('/edu/f/edu/gps/locate?uid='+$scope.user.id).
+    $http.get('http://adminapp.online-openday.com/f/edu/gps/locate?uid='+$scope.user.id).
         success(function (data, status, headers, config) {
             $scope.gpsNow = data;
         }).
@@ -53,7 +53,7 @@ app.controller('gpsController', function ($rootScope, $scope, $http,$location) {
 
     $scope.relocateGps = function(){
         $("#relocateContainer").html('定位中...');
-        var url = '/edu/f/edu/gps/locate?uid='+$scope.user.id;
+        var url = 'http://adminapp.online-openday.com/f/edu/gps/locate?uid='+$scope.user.id;
 
         $http.get(url).
             success(function (data, status, headers, config) {
@@ -83,7 +83,7 @@ app.controller('loginController', function ($rootScope, $scope, $http) {
             return
         }
 
-        $http.get('/edu/f/edu/account/login?loginName=' + $scope.loginName + '&password=' + $scope.password).
+        $http.get('http://adminapp.online-openday.com/f/edu/account/login?loginName=' + $scope.loginName + '&password=' + $scope.password).
             success(function (data, status, headers, config) {
                 $scope.login_rs = data;
                 if ($scope.login_rs.rs == true) {

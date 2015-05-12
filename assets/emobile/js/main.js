@@ -31,8 +31,10 @@ app.controller('HomeController', function($rootScope, $scope,$http,$location,$ro
     $("#tab_setting img").attr('src','imgs/setting.png');
     Cookies.json = true;
     //判断是否登录
-    if(Cookies.get("login")==true){//进行报名操作
-      $scope.user = Cookies.get("user");
+
+    if(localStorage.getItem('login')=='true'){//进行报名操作
+      //$scope.user = Cookies.get("user");
+
       window.location.href="#/personal";
     }else{//去登录
       window.location.href="#/login";
@@ -60,8 +62,10 @@ app.controller('HomeController', function($rootScope, $scope,$http,$location,$ro
   $("#home_menu_personal").on('click',function(){
     Cookies.json = true;
     //判断是否登录
-    if(Cookies.get("login")==true){//进行报名操作
-      $scope.user = Cookies.get("user");
+
+    if(localStorage.getItem('login')=='true'){//进行报名操作
+
+      $scope.user = JSON.parse(localStorage.getItem('user'));
       window.location.href="#/personal";
     }else{//去登录
       window.location.href="#/login";
@@ -153,8 +157,10 @@ app.controller('HomeController', function($rootScope, $scope,$http,$location,$ro
 
     Cookies.json = true;
     //判断是否登录
-    if(Cookies.get("login")==true){//进行报名操作
-      $scope.user = Cookies.get("user");
+
+    if(localStorage.getItem('login')=='true'){//进行报名操作
+      //$scope.user = Cookies.get("user");
+      $scope.user = JSON.parse(localStorage.getItem('user'));
       window.location.href="gps_main.html";
     }else{//去登录
       window.location.href="#/login";
@@ -172,7 +178,7 @@ app.controller('HomeController', function($rootScope, $scope,$http,$location,$ro
   });
 
   $("#home_menu_contact").on('click',function(){
-    window.location.href="tab_personal.html";
+    window.location.href="suggestion_main.html";
   });
 
   Cookies.json = true;
@@ -196,15 +202,19 @@ app.controller('HomeController', function($rootScope, $scope,$http,$location,$ro
 
           if($scope.login_rs.rs==true){
             //存储用户信息
-            Cookies.set('login', true, { path: '/'});
-            alert(Cookies.get('login'));
-            Cookies.set('guardian', $scope.login_rs.guardian, { path: '/'});
-            Cookies.set('user', $scope.login_rs.euser, { path: '/'});
+            localStorage.setItem('login','true');
+            //Cookies.set('login', true, { path: '/'});
+              localStorage.setItem('guardian',JSON.stringify($scope.login_rs.guardian));
+              localStorage.setItem('user',JSON.stringify($scope.login_rs.euser));
+
+            //Cookies.set('guardian', $scope.login_rs.guardian, { path: '/'});
+            //Cookies.set('user', $scope.login_rs.euser, { path: '/'});
             window.history.back();
 
           }else{
             alert("用户名或密码错误");
-            Cookies.set("login",false, { path: '/'});
+              localStorage.setItem('login','false');
+            //Cookies.set("login",false, { path: '/'});
           }
 
         }).
@@ -227,7 +237,7 @@ app.controller('HomeController', function($rootScope, $scope,$http,$location,$ro
       return ;
     }
     //注册
-    $http.post('/edu/f/edu/account/register?loginName='+$scope.userName+'&password='+$scope.password, {userName:$scope.userName,password:$scope.password}).
+    $http.post('http://adminapp.online-openday.com/f/edu/account/register?loginName='+$scope.userName+'&password='+$scope.password, {userName:$scope.userName,password:$scope.password}).
         success(function(data, status, headers, config) {
           if(data.rs==true){
             alert("注册成功");
@@ -345,7 +355,9 @@ app.controller('settingController', function($rootScope, $scope,$cookieStore,$lo
 
 
   $scope.logout = function(){
-    Cookies.remove('login',{ path: '/' });
+
+    //Cookies.remove('login',{ path: '/' });
+    localStorage.setItem('login','false');
     $location.path("/home");
   };
 
@@ -387,13 +399,13 @@ app.controller('MainController', function($rootScope, $scope,$http){
   $scope.userAgent = navigator.userAgent;
   
   //// Needed for the loading screen
-  //$rootScope.$on('$routeChangeStart', function(){
-  //  $rootScope.loading = true;
-  //});
-  //
-  //$rootScope.$on('$routeChangeSuccess', function(){
-  //  $rootScope.loading = false;
-  //});
+  $rootScope.$on('$routeChangeStart', function(){
+    $rootScope.loading = false;
+  });
+
+  $rootScope.$on('$routeChangeSuccess', function(){
+    $rootScope.loading = false;
+  });
 
   // Fake text i used here and there.
   $scope.lorem = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel explicabo, aliquid eaque soluta nihil eligendi adipisci error, illum corrupti nam fuga omnis quod quaerat mollitia expedita impedit dolores ipsam. Obcaecati.';

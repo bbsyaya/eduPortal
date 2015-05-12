@@ -28,16 +28,14 @@ app.config(function($routeProvider) {
 });
 
 app.controller('detailController', function($rootScope, $scope,$http,$routeParams){
-	$http.get('/edu/f/edu/schoolNews/get?id='+$routeParams.id).
-	  success(function(data, status, headers, config) {
-	    $scope.schoolNews = data;
-	    
-  }).
-  error(function(data, status, headers, config) {
-    // called asynchronously if an error occurs
-    // or server returns response with an error status.
-  });
-  
+
+    for(var i=0;i<$rootScope.schoolNewses.length;i++){
+        if($rootScope.schoolNewses[i].id == $routeParams.id){
+            $scope.schoolNews = $rootScope.schoolNewses[i];
+            break;
+        }
+    }
+
   $scope.deliberatelyTrustDangerousSnippet = function() {  
 	return $sce.trustAsHtml($scope.snippet);  
   };  
@@ -49,17 +47,24 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
 });
 
 app.controller('schoolNewsController', function($rootScope, $scope,$http,$location){
-  Cookies.json = true;
-  if(Cookies.get("login")==true){
-    $scope.user = Cookies.get("user");
+  //Cookies.json = true;
+
+  if(localStorage.getItem('login') == 'true'){
+    $scope.user = JSON.parse(localStorage.getItem('user'));
     $scope.schoolName = $scope.user.school.name;
   }else{
     $location.path("/login")
   }
 
-	$http.get('/edu/f/edu/schoolNews?schoolId='+$scope.user.school.id).
+	$http.get('http://adminapp.online-openday.com/f/edu/schoolNews?schoolId='+$scope.user.school.id).
 	  success(function(data, status, headers, config) {
-	    $scope.schoolNewses = data;
+
+            for(var i=0;i<data.length;i++){
+                if(data[i].img == ''){
+                    data[i].img = "imgs/myschool_default_icon.png";
+                }
+            }
+            $rootScope.schoolNewses = data;
 	    
   }).
   error(function(data, status, headers, config) {
@@ -82,7 +87,7 @@ app.controller('schoolNewsController', function($rootScope, $scope,$http,$locati
       return
     }
 
-    $http.get('/edu/f/edu/account/login?loginName='+$scope.loginName+'&password='+$scope.password).
+    $http.get('http://adminapp.online-openday.com/f/edu/account/login?loginName='+$scope.loginName+'&password='+$scope.password).
         success(function(data, status, headers, config) {
           $scope.login_rs = data;
           if($scope.login_rs.rs==true){

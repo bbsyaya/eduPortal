@@ -2,22 +2,23 @@ package com.milk.eduPortal;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.WindowManager;
 import android.webkit.*;
 
-public class LocalActivity extends Activity {
+/**
+ * Created by lala on 15/5/12.
+ */
+public class CookieActivity extends Activity{
+
     WebView webView;
-    CommonDialogLoading progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.cookie);
         webView = (WebView) findViewById(R.id.webView);
         init();
-        webView.loadUrl("file:///android_asset/emobile/index.html#home");
+        webView.loadUrl("file:///android_asset/emobile/cookie.html");
+
     }
 
     private void init() {
@@ -44,35 +45,12 @@ public class LocalActivity extends Activity {
             }
 
         });
-        progressDialog = new CommonDialogLoading(LocalActivity.this);
-    }
-
-    @Override
-    public void onBackPressed() {
-
-        if(webView.getUrl().contains("/#/")){
-            finish();
-        }
-
-        if(webView.canGoBack()){
-            webView.goBack();
-        }else{
-            finish();
-        }
     }
 
     private class WebViewChromeClientXY extends WebChromeClient {
         // 设置网页加载的进度条
         public void onProgressChanged(WebView view, int newProgress) {
-            try {
-                if (newProgress == 100) {
-                    progressDialog.dismiss();
-                } else {
-                    progressDialog.show();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+
         }
 
         // 获取网页的标题

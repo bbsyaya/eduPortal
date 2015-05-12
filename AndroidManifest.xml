@@ -20,5 +20,6 @@
         </activity>
         <activity android:name=".MainActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".LocalActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".CookieActivity" android:screenOrientation="portrait"></activity>
     </application>
 </manifest>

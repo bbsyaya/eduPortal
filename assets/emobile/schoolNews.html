@@ -6,7 +6,7 @@
         <table height=100%>
             <tr>
                 <td style="color:white;padding-left: 20px;" >
-                    <img src="emobile/imgs/back.png" class="back_arrow" />
+                    <img src="imgs/back.png" class="back_arrow" />
                 </td>
             </tr>
         </table>
@@ -15,19 +15,21 @@
 <div class="scrollable">
 
     <div class="scrollable-content">
-        <div><img src="emobile/imgs/logo_schoolNew.jpg" width="100%"  /></div>
+        <div><img src="imgs/logo_schoolNew.jpg" width="100%"  /></div>
 
         <div class="list-group">
             <a ng-repeat="schoolNews in schoolNewses" href="#/detail/{{ schoolNews.id }}" class="list-group-item">
-		
+
 				<table height=100%>
                     <tr>
-                        <td><img src="{{ schoolNews.img }}" width="80px" height="80px"/>&nbsp;&nbsp;</td>
+                        <td width="120px" height="80px"><img src="{{ schoolNews.img }}" width="120px" height="80px"/></td>
+                        <td width="15px;"></td>
+                        <!--<td><img src="imgs/myschool_default_icon.png" width="80px" height="80px"/></td>-->
                         <td>
                             <table border=0 height=100%>
                                 <tr>
                                     <!--标题-->
-                                    <td>{{schoolNews.title }}</td>
+                                    <td style="color: #333;font-size: 17px;"> {{schoolNews.title }}</td>
                                 </tr>
 
                                 <tr>
@@ -35,10 +37,10 @@
                                 </tr>
 
                                 <tr>
-                                    <td>{{schoolNews.summary }}</td>
+                                    <td style="color: #999;">{{schoolNews.summary }}</td>
                                 </tr>
                                 <tr>
-                                    <td height="100%" valign=bottom>{{schoolNews.createDate | date:'yyyy-MM-dd
+                                    <td height="100%" valign=bottom style="color: #999;">{{schoolNews.createDate | date:'yyyy-MM-dd
                                         HH:mm:ss'}}
                                     </td>
                                 </tr>

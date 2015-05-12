@@ -47,10 +47,10 @@ app.controller('detailController', function ($rootScope, $scope, $http, $routePa
 });
 
 app.controller('replyController', function ($rootScope, $scope, $http) {
-    Cookies.json = true;
-    $scope.user = Cookies.get("user");
 
-    $http.get('/edu/f/edu/question?uid='+$scope.user.id).
+    $scope.user = JSON.parse(localStorage.getItem('user'));
+
+    $http.get('http://adminapp.online-openday.com/f/edu/question?uid='+$scope.user.id).
         success(function (data, status, headers, config) {
             $rootScope.replies = data.questions;
 
@@ -67,8 +67,8 @@ app.controller('replyController', function ($rootScope, $scope, $http) {
 
 
 app.controller('msgController', function($rootScope, $scope,$http,$location,$routeParams){
-    Cookies.json = true;
-    $scope.user = Cookies.get("user");
+
+    $scope.user = JSON.parse(localStorage.getItem('user'));
 
     $scope.title="";
     $scope.content="";
@@ -85,7 +85,7 @@ app.controller('msgController', function($rootScope, $scope,$http,$location,$rou
         }
 
         //提交请求
-        $http.get('/edu/f/edu/question/save?euser.id='+$scope.user.id+'&msg='+$scope.content+'&title='+$scope.title).
+        $http.get('http://adminapp.online-openday.com/f/edu/question/save?euser.id='+$scope.user.id+'&msg='+$scope.content+'&title='+$scope.title).
             success(function(data, status, headers, config) {
                 if(data==true){
                     alert('提交成功');

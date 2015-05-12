@@ -32,7 +32,7 @@ app.config(function($routeProvider) {
 app.controller('sisterController', function($rootScope, $scope,$http){
 
 	//教师列表
-	$http.get('/edu/f/edu/sister').
+	$http.get('http://adminapp.online-openday.com/f/edu/sister').
 		success(function(data, status, headers, config) {
 			$rootScope.sisters = data;
 		}).
@@ -46,7 +46,7 @@ app.controller('sisterController', function($rootScope, $scope,$http){
 });
 
 app.controller('detailController', function($rootScope, $scope,$http,$routeParams){
-	Cookies.json = true;
+
 	for(var i=0;i<$rootScope.sisters.length;i++){
 		if($rootScope.sisters[i].id == $routeParams.id){
 			$scope.sister = $rootScope.sisters[i];
@@ -54,71 +54,6 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
 		}
 	}
 
-	$scope.login = function(){
-
-		if($scope.loginName==undefined || $scope.loginName==""){
-			alert("请输入用户名");
-			return
-		}
-
-		if($scope.password==undefined || $scope.password==""){
-			alert("请输入密码");
-			return
-		}
-
-
-
-		$http.get('/edu/f/edu/account/login?loginName='+$scope.loginName+'&password='+$scope.password).
-			success(function(data, status, headers, config) {
-				$scope.login_rs = data;
-				if($scope.login_rs.rs==true){
-					//存储用户信息
-					Cookies.set('login', true, { path: '/'});
-					Cookies.set('guardian', $scope.login_rs.guardian, { path: '/'});
-					Cookies.set('user', $scope.login_rs.euser, { path: '/'});
-					window.history.back();
-
-				}else{
-					alert("用户名或密码错误");
-					Cookies.put("login",false);
-				}
-
-			}).
-			error(function(data, status, headers, config) {
-				alert("登录失败")
-			});
-	};
-
-	$scope.register = function(){
-		if($scope.userName == undefined||$scope.userName.trim()==""){
-			alert("请输入用户名");
-			return ;
-		}
-		if($scope.password == undefined||$scope.password.trim()==""){
-			alert("请输入密码");
-			return ;
-		}
-		if($scope.password2 == undefined||$scope.password2.trim()==""||$scope.password!=$scope.password2.trim()){
-			alert("二次输入的密码不一致");
-			return ;
-		}
-		//注册
-		$http.post('/edu/f/edu/account/register?loginName='+$scope.userName+'&password='+$scope.password, {userName:$scope.userName,password:$scope.password}).
-			success(function(data, status, headers, config) {
-				if(data.rs==true){
-					alert("注册成功");
-					window.history.go(-1);
-				}else{
-					alert(data.msg);
-				}
-
-			}).
-			error(function(data, status, headers, config) {
-				alert("注册失败");
-			});
-
-
-	};
   $scope.deliberatelyTrustDangerousSnippet = function() {  
 	return $sce.trustAsHtml($scope.snippet);  
   };  
@@ -126,14 +61,8 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
 });
 
 app.controller('msgController', function($rootScope, $scope,$http,$location,$routeParams){
-	Cookies.json = true;
-	//判断是否登录
-	if(Cookies.get("login")==true){//进行报名操作
-		$scope.user = Cookies.get("user");
-	}else{//去登录
-		$location.path("/login");
-		return;
-	}
+
+    $scope.user = JSON.parse(localStorage.getItem('user'));
 
 	$scope.title="";
 	$scope.content="";
@@ -152,7 +81,7 @@ app.controller('msgController', function($rootScope, $scope,$http,$location,$rou
 		//提交请求
 
 		//$http.get('/edu/f/edu/sister/msg?sisterId='+$routeParams.id+'&uid='+$scope.user.id+'&title='+$scope.title+'&msg='+$scope.content).
-		$http.get('/edu/f/edu/question/save?euser.id='+$scope.user.id+'&msg='+$scope.content+'&title='+$scope.title).
+		$http.get('http://adminapp.online-openday.com/f/edu/question/save?euser.id='+$scope.user.id+'&msg='+$scope.content+'&title='+$scope.title).
 	  	success(function(data, status, headers, config) {
 			if(data==true){
 				alert('提交成功');
