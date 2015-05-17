@@ -16,29 +16,28 @@ app.filter('trustHtml', function ($sce) {
 
     });
 
-// 
-// You can configure ngRoute as always, but to take advantage of SharedState location
-// feature (i.e. close sidebar on backbutton) you should setup 'reloadOnSearch: false' 
-// in order to avoid unwanted routing.
-// 
 app.config(function($routeProvider) {
   $routeProvider.when('/',              {templateUrl: 'emergency.html', controller:'emergencyController', reloadOnSearch: false});  
   $routeProvider.when('/detail/:id',        {templateUrl: 'emergency_detail.html',controller:'detailController', reloadOnSearch: false});   
 });
 
 app.controller('detailController', function($rootScope, $scope,$http,$routeParams){
-	$scope.activityId = $routeParams.id;
 
-	$http.get('http://adminapp.online-openday.com/f/edu/emergency/get?id='+$routeParams.id).
-	  success(function(data, status, headers, config) {
-	    $scope.emergency = data;
-	    
-  }).
-  error(function(data, status, headers, config) {
-    // called asynchronously if an error occurs
-    // or server returns response with an error status.
-	
-  });    
+    for(var i=0;i<$rootScope.emergencys.length;i++){
+        if($rootScope.emergencys[i].id = $routeParams.id){
+            $scope.emergency = $rootScope.emergencys[i];
+            break;
+        }
+    }
+
+	//$http.get('http://adminapp.online-openday.com/f/edu/emergency/get?id='+$routeParams.id).
+	//  success(function(data, status, headers, config) {
+	//    $scope.emergency = data;
+	//
+  //}).
+  //error(function(data, status, headers, config) {
+	//
+  //});
   
   $scope.deliberatelyTrustDangerousSnippet = function() {  
 	return $sce.trustAsHtml($scope.snippet);  
@@ -51,22 +50,19 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
 });
 
 app.controller('emergencyController', function($rootScope, $scope,$http){
-  $scope.userAgent = navigator.userAgent;
+    $("#loading").show();
 
 	$http.get('http://adminapp.online-openday.com/f/edu/emergency').
 	  success(function(data, status, headers, config) {
-    	// this callback will be called asynchronously
-	    // when the response is available			
-	    $scope.emergencys = data;
-          if(data.type==0){
 
-          }
+            $rootScope.emergencys = data;
+            $("#loading").hide();
+
 	    
   }).
   error(function(data, status, headers, config) {
-    // called asynchronously if an error occurs
-    // or server returns response with an error status.
-	
+            $("#loading").hide();
+            swal("加载失败")
   });
   
   $scope.back = function(){

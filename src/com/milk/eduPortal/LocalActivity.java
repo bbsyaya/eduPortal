@@ -64,15 +64,15 @@ public class LocalActivity extends Activity {
     private class WebViewChromeClientXY extends WebChromeClient {
         // 设置网页加载的进度条
         public void onProgressChanged(WebView view, int newProgress) {
-            try {
-                if (newProgress == 100) {
-                    progressDialog.dismiss();
-                } else {
-                    progressDialog.show();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+//            try {
+//                if (newProgress == 100) {
+//                    progressDialog.dismiss();
+//                } else {
+//                    progressDialog.show();
+//                }
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
         }
 
         // 获取网页的标题

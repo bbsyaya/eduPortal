@@ -29,16 +29,18 @@ app.config(function($routeProvider) {
 
 
 app.controller('schoolController', function($rootScope, $scope,$http,$routeParams){
+    $("#loading").show();
 	$scope.activityId = $routeParams.id;
 	$scope.country = $routeParams.country;
 	$http.get('http://adminapp.online-openday.com/f/edu/school/getByCountryId?id='+$routeParams.id).
 	  success(function(data, status, headers, config) {
           $rootScope.schools = data;
+            $("#loading").hide();
 	    
   }).
   error(function(data, status, headers, config) {
-    // called asynchronously if an error occurs
-    // or server returns response with an error status.
+            $("#loading").hide();
+            swal("加载失败")
 	
   });    
   
@@ -94,12 +96,11 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
 });
 
 app.controller('countryController', function($rootScope, $scope,$http){
-  $scope.userAgent = navigator.userAgent;
+
 
 	$http.get('http://adminapp.online-openday.com/f/edu/country').
 	  success(function(data, status, headers, config) {
-    	// this callback will be called asynchronously
-	    // when the response is available
+
 	    $scope.countrys = data;
 	    
   }).

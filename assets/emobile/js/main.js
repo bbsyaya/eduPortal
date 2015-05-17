@@ -195,7 +195,6 @@ app.controller('HomeController', function($rootScope, $scope,$http,$location,$ro
     }
 
 
-
     $http.get('http://adminapp.online-openday.com/f/edu/account/login?loginName='+$scope.loginName+'&password='+$scope.password).
         success(function(data, status, headers, config) {
           $scope.login_rs = data;
@@ -250,8 +249,6 @@ app.controller('HomeController', function($rootScope, $scope,$http,$location,$ro
         error(function(data, status, headers, config) {
           alert("注册失败");
         });
-
-
   };
 
 });

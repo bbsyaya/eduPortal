@@ -37,9 +37,9 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
     }
   
   $scope.deliberatelyTrustDangerousSnippet = function() {  
-	return $sce.trustAsHtml($scope.snippet);  
-  };  
-  
+	return $sce.trustAsHtml($scope.snippet);
+  };
+
   $scope.back = function(){
     	window.history.go(-1);
     };
@@ -47,18 +47,17 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
 });
 
 app.controller('ConvenienceController', function($rootScope, $scope,$http){
-  $scope.userAgent = navigator.userAgent;
+    $("#loading").show();
 
 	$http.get('http://adminapp.online-openday.com/f/edu/convenience').
 	  success(function(data, status, headers, config) {
-    	// this callback will be called asynchronously
-	    // when the response is available			
           $rootScope.conveniences = data;
+            $("#loading").hide();
 	    
   }).
   error(function(data, status, headers, config) {
-    // called asynchronously if an error occurs
-    // or server returns response with an error status.
+            $("#loading").hide();
+            swal("加载失败")
 	
   });
   

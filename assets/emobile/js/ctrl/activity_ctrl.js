@@ -35,17 +35,6 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
       }
     }
 
-	//$http.get('/edu/f/edu/activity/get?id='+$routeParams.id).
-	//  success(function(data, status, headers, config) {
-	//    $scope.activity = data;
-	//
-  //}).
-  //error(function(data, status, headers, config) {
-  //  // called asynchronously if an error occurs
-  //  // or server returns response with an error status.
-	//
-  //});
-  
   $scope.deliberatelyTrustDangerousSnippet = function() {  
 	return $sce.trustAsHtml($scope.snippet);  
   };  
@@ -58,16 +47,16 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
 
 app.controller('ActivityController', function($rootScope, $scope,$http){
   $scope.userAgent = navigator.userAgent;
-
+    $("#loading").show();
 	$http.get('http://adminapp.online-openday.com/f/edu/activity').
 	  success(function(data, status, headers, config) {
           $rootScope.activitys = data;
+            $("#loading").hide();
 	    
   }).
   error(function(data, status, headers, config) {
-    // called asynchronously if an error occurs
-    // or server returns response with an error status.
-	
+            $("#loading").hide();
+            swal("加载失败")
   });
   
   $scope.back = function(){

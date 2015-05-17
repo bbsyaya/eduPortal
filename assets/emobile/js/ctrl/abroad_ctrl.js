@@ -166,16 +166,18 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
 });
 
 app.controller('abroadController', function($rootScope, $scope,$http){
-  $scope.userAgent = navigator.userAgent;
+    $("#loading").show();
 
 	$http.get('http://adminapp.online-openday.com/f/edu/abroad').
 	  success(function(data, status, headers, config) {
             $rootScope.abroads = data;
+            $("#loading").hide();
 
 	    
   }).
   error(function(data, status, headers, config) {
-
+            $("#loading").hide();
+            swal("加载失败")
   });
   
   $scope.back = function(){
