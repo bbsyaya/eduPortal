@@ -15,6 +15,8 @@
 	<link rel="stylesheet" href="css/mobile-angular-ui-hover.min.css" />
 	<link rel="stylesheet" href="css/mobile-angular-ui-base.min.css" />
 	<link rel="stylesheet" href="css/mobile-angular-ui-desktop.min.css" />
+      <link rel="stylesheet" href="css/sweetalert.css"/>
+      <link rel="stylesheet" href="css/loading.css"/>
 
 	<link rel="stylesheet" href="css/carousel/owl.carousel.css" />
 	<link rel="stylesheet" href="css/carousel/owl.theme.css" />
@@ -25,6 +27,7 @@
 	<link rel="stylesheet" media="screen and (-webkit-device-pixel-ratio: 1.0)" href="css/mdpi.css" />
 	<link rel="stylesheet" media="screen and (-webkit-device-pixel-ratio: 0.75)" href="css/ldpi.css" />
 
+      <script src="js/jquery-1.8.3.min.js"></script>
 	<script src="js/angular.min.js"></script>
 	<script src="js/angular-route.min.js"></script>
 	<script src="js/mobile-angular-ui.min.js"></script>
@@ -32,16 +35,30 @@
 	<script src="js/mobile-angular-ui.gestures.min.js"></script>
 	
 	<script src="js/ctrl/suggestion_ctrl.js"></script>
-	<style>
-/* 
-		 a:link {color: white}
-		 a:visited {color: white}
-		 a:hover {color: white} 
-		 a:active {color: white}
- */
-	</style>
+      <script src="js/sweetalert.min.js"></script>
+
   </head>
 <body >
 <div ng-view></div>
+<div id="loading" style="position: absolute;width: 100%;height: 100%;display: none;">
+    <table style="width: 100%;height: 100%;" border="1">
+        <tr>
+            <td width="100%" height="100%" align="center" valign="middle">
+                <div id="circular" style="float:none;">
+                    <div id="circular_1" class="circular"></div>
+                    <div id="circular_2" class="circular"></div>
+                    <div id="circular_3" class="circular"></div>
+                    <div id="circular_4" class="circular"></div>
+                    <div id="circular_5" class="circular"></div>
+                    <div id="circular_6" class="circular"></div>
+                    <div id="circular_7" class="circular"></div>
+                    <div id="circular_8" class="circular"></div>
+                    <div class="clearfix"></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+</div>
 </body>
 </html>

@@ -42,26 +42,27 @@ app.controller('msgController', function($rootScope, $scope,$http,$routeParams){
 
     $scope.postMsg = function(){
         if($scope.title == undefined){
-            alert('请输入标题');
+            swal("请输入标题");
             return;
         }else if($scope.content == undefined){
-            alert('请输入标题');
+            swal("请输入内容");
             return;
         }
-
+        $("#loading").show();
         //提交
         $http.get('http://adminapp.online-openday.com/f/edu/suggestion/save?type='+$routeParams.type+'&title='+$scope.title+'&msg='+$scope.content).
             success(function(data, status, headers, config) {
                 if(data==true){
-                    alert('提交成功');
+                    $("#loading").hide();
                     window.history.go(-1);
                 }else{
-                    alert('提交失败');
+                    $("#loading").hide();
                 }
 
             }).
             error(function(data, status, headers, config) {
-                alert('提交失败');
+                $("#loading").hide();
+                swal('提交失败');
             });
     };
 

@@ -30,17 +30,20 @@ app.config(function($routeProvider) {
 });
 
 app.controller('sisterController', function($rootScope, $scope,$http){
-
+    $("#loading").show();
 	//教师列表
 	$http.get('http://adminapp.online-openday.com/f/edu/sister').
 		success(function(data, status, headers, config) {
+            $("#loading").hide();
 			$rootScope.sisters = data;
 		}).
 		error(function(data, status, headers, config) {
-			alert("加载失败");
+            $("#loading").hide();
+            swal("加载失败");
 		});
 
 	$rootScope.back = function(){
+        $("#loading").hide();
 		window.history.go(-1);
 	};
 });
@@ -63,35 +66,32 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
 app.controller('msgController', function($rootScope, $scope,$http,$location,$routeParams){
 
     $scope.user = JSON.parse(localStorage.getItem('user'));
-
 	$scope.title="";
 	$scope.content="";
 
 	$scope.postMsg = function(){
 		if($scope.title==""){
-			alert("请输入标题");
+            swal("请输入标题");
 			return;
 		}
 			
 		if($scope.content==""){
-			alert("请输入内容");
+            swal("请输入内容");
 			return;
 		}
 
 		//提交请求
-
-		//$http.get('/edu/f/edu/sister/msg?sisterId='+$routeParams.id+'&uid='+$scope.user.id+'&title='+$scope.title+'&msg='+$scope.content).
 		$http.get('http://adminapp.online-openday.com/f/edu/question/save?euser.id='+$scope.user.id+'&msg='+$scope.content+'&title='+$scope.title).
 	  	success(function(data, status, headers, config) {
 			if(data==true){
-				alert('提交成功');
+                swal('提交成功');
 				window.history.go(-1);
 			}else{
-				alert('提交失败');
+                swal('提交失败');
 			}
   		}).
 	  error(function(data, status, headers, config) {
-				alert('提交失败');
+                swal('提交失败');
 	  });
 			
 	};

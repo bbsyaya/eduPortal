@@ -49,12 +49,7 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
 
 
 app.controller('guardianController', function($rootScope, $scope,$http,$location){
-  //Cookies.json = true;
-  //if(Cookies.get("login")==true){
-  //
-  //}else{
-  //  $location.path("/login")
-  //}
+
     $scope.user =   JSON.parse(localStorage.getItem('user'));
     $scope.guardian = JSON.parse(localStorage.getItem('guardian'));
     if($scope.guardian == undefined){
@@ -107,23 +102,26 @@ app.controller('reportController', function($rootScope, $scope,$http,$location){
     $scope.user =   JSON.parse(localStorage.getItem('user'));
     $scope.guardian = JSON.parse(localStorage.getItem('guardian'));
     if($scope.guardian == undefined){
-        alert('您没有监护人');
+        swal('您没有监护人');
         return;
     }else{
+        $("#loading").show();
         //读取报告列表
         $http.get('http://adminapp.online-openday.com/f/edu/reportGuardian?uid='+$scope.guardian.id).
             success(function(data, status, headers, config) {
                 $rootScope.reports = data;
-
+                $("#loading").hide();
             }).
             error(function(data, status, headers, config) {
-                alert("获取失败")
+                $("#loading").hide();
+                swal("获取失败")
             });
 
     }
 
 
   $scope.back = function(){
+      $("#loading").hide();
     window.history.go(-1);
   };
 

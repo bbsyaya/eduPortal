@@ -159,7 +159,6 @@ app.controller('HomeController', function($rootScope, $scope,$http,$location,$ro
     //判断是否登录
 
     if(localStorage.getItem('login')=='true'){//进行报名操作
-      //$scope.user = Cookies.get("user");
       $scope.user = JSON.parse(localStorage.getItem('user'));
       window.location.href="gps_main.html";
     }else{//去登录
@@ -185,21 +184,24 @@ app.controller('HomeController', function($rootScope, $scope,$http,$location,$ro
   $scope.login = function(){
 
     if($scope.loginName==undefined || $scope.loginName==""){
-      alert("请输入用户名");
+
+        swal("请输入用户名");
       return
     }
 
     if($scope.password==undefined || $scope.password==""){
-      alert("请输入密码");
+        swal("请输入密码");
       return
     }
 
-
+      $("#loading").show();
     $http.get('http://adminapp.online-openday.com/f/edu/account/login?loginName='+$scope.loginName+'&password='+$scope.password).
         success(function(data, status, headers, config) {
+            $("#loading").hide();
           $scope.login_rs = data;
 
           if($scope.login_rs.rs==true){
+              $("#loading").hide();
             //存储用户信息
             localStorage.setItem('login','true');
             //Cookies.set('login', true, { path: '/'});
@@ -211,9 +213,9 @@ app.controller('HomeController', function($rootScope, $scope,$http,$location,$ro
             window.history.back();
 
           }else{
-            alert("用户名或密码错误");
+              $("#loading").hide();
+              swal("用户名或密码错误");
               localStorage.setItem('login','false');
-            //Cookies.set("login",false, { path: '/'});
           }
 
         }).

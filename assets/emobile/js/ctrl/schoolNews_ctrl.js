@@ -56,9 +56,10 @@ app.controller('schoolNewsController', function($rootScope, $scope,$http,$locati
     $location.path("/login")
   }
 
+    $("#loading").show();
 	$http.get('http://adminapp.online-openday.com/f/edu/schoolNews?schoolId='+$scope.user.school.id).
 	  success(function(data, status, headers, config) {
-
+            $("#loading").hide();
             for(var i=0;i<data.length;i++){
                 if(data[i].img == ''){
                     data[i].img = "imgs/myschool_default_icon.png";
@@ -68,10 +69,11 @@ app.controller('schoolNewsController', function($rootScope, $scope,$http,$locati
 	    
   }).
   error(function(data, status, headers, config) {
-
+            $("#loading").hide();
   });
   
   $scope.back = function(){
+      $("#loading").hide();
     	window.history.go(-1);
     };
 

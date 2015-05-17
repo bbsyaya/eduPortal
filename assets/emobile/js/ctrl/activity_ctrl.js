@@ -35,7 +35,7 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
       }
     }
 
-  $scope.deliberatelyTrustDangerousSnippet = function() {  
+  $scope.deliberatelyTrustDangerousSnippet = function() {
 	return $sce.trustAsHtml($scope.snippet);  
   };  
   
@@ -56,7 +56,7 @@ app.controller('ActivityController', function($rootScope, $scope,$http){
   }).
   error(function(data, status, headers, config) {
             $("#loading").hide();
-            swal("加载失败")
+            swal("加载失败");
   });
   
   $scope.back = function(){
