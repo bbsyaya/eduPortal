@@ -7,6 +7,7 @@ var app = angular.module('emobile', [
 ]);
 
 app.config(function($routeProvider) {
+  $routeProvider.when('/',              {templateUrl: 'home.html', controller:'HomeController', reloadOnSearch: false});
   $routeProvider.when('/home',              {templateUrl: 'home.html', controller:'HomeController', reloadOnSearch: false});
   $routeProvider.when('/personal',              {templateUrl: 'personal.html', controller:'personalController', reloadOnSearch: false});
   $routeProvider.when('/setting',              {templateUrl: 'setting.html', controller:'settingController', reloadOnSearch: false});
@@ -180,11 +181,10 @@ app.controller('HomeController', function($rootScope, $scope,$http,$location,$ro
     window.location.href="suggestion_main.html";
   });
 
-  Cookies.json = true;
+
   $scope.login = function(){
 
     if($scope.loginName==undefined || $scope.loginName==""){
-
         swal("请输入用户名");
       return
     }
@@ -197,6 +197,7 @@ app.controller('HomeController', function($rootScope, $scope,$http,$location,$ro
       $("#loading").show();
     $http.get('http://adminapp.online-openday.com/f/edu/account/login?loginName='+$scope.loginName+'&password='+$scope.password).
         success(function(data, status, headers, config) {
+
             $("#loading").hide();
           $scope.login_rs = data;
 
@@ -220,7 +221,8 @@ app.controller('HomeController', function($rootScope, $scope,$http,$location,$ro
 
         }).
         error(function(data, status, headers, config) {
-          alert("登录失败")
+            $("#loading").hide();
+            swal("登录失败")
         });
   };
 

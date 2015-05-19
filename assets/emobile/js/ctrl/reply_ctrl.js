@@ -48,15 +48,18 @@ app.controller('detailController', function ($rootScope, $scope, $http, $routePa
 
 app.controller('replyController', function ($rootScope, $scope, $http) {
 
+    $("#loading").show();
     $scope.user = JSON.parse(localStorage.getItem('user'));
 
     $http.get('http://adminapp.online-openday.com/f/edu/question?uid='+$scope.user.id).
         success(function (data, status, headers, config) {
+            $("#loading").hide();
             $rootScope.replies = data.questions;
 
         }).
         error(function (data, status, headers, config) {
-            alert('读取数据失败');
+            $("#loading").hide();
+            swal('读取数据失败');
         });
 
     $scope.back = function () {

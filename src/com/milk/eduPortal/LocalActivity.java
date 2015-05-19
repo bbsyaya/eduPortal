@@ -17,7 +17,8 @@ public class LocalActivity extends Activity {
 
         webView = (WebView) findViewById(R.id.webView);
         init();
-        webView.loadUrl("file:///android_asset/emobile/index.html#home");
+//        webView.loadUrl("file:///android_asset/emobile/index.html#home");
+        webView.loadUrl("file:///android_asset/emobile/index.html");
     }
 
     private void init() {
