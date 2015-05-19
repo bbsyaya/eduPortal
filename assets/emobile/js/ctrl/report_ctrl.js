@@ -34,7 +34,6 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
         $scope.report = $rootScope.reports[i];
         break;
       }
-
     }
 
   $scope.deliberatelyTrustDangerousSnippet = function() {  
@@ -49,25 +48,36 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
 
 app.controller('listController', function($rootScope, $scope,$http,$routeParams){
 
-    if($routeParams.id==0){
-        $("#img").attr("src","imgs/report_week.jpg");
-    }else if($routeParams.id==1){
-        $("#img").attr("src","imgs/month_week.jpg");
-    }else if($routeParams.id==2){
-        $("#img").attr("src","imgs/report_sem.jpg");
-    }else if($routeParams.id==3){
-        $("#img").attr("src","imgs/report_year.jpg");
+    $scope.user =   JSON.parse(localStorage.getItem('user'));
+    $scope.guardian = JSON.parse(localStorage.getItem('guardian'));
+
+    if($scope.guardian == undefined){
+        $("#img").show();
+        if($routeParams.id==0){
+            $("#img").attr("src","imgs/report_week.jpg");
+        }else if($routeParams.id==1){
+            $("#img").attr("src","imgs/month_week.jpg");
+        }else if($routeParams.id==2){
+            $("#img").attr("src","imgs/report_sem.jpg");
+        }else if($routeParams.id==3){
+            $("#img").attr("src","imgs/report_year.jpg");
+        }
+        return;
     }
 
-	//$http.get('http://adminapp.online-openday.com/f/edu/report/list?type='+$routeParams.id).
-	//  success(function(data, status, headers, config) {
-  //        $rootScope.reports = data;
-  //
-  //}).
-  //error(function(data, status, headers, config) {
-  //
-  //
-  //});
+
+    $("#loading").show();
+	$http.get('http://adminapp.online-openday.com/f/edu/report/list?type='+$routeParams.id).
+	  success(function(data, status, headers, config) {
+            $("#loading").hide();
+          $rootScope.reports = data;
+
+  }).
+  error(function(data, status, headers, config) {
+            $("#loading").hide();
+            swal("数据加载失败");
+
+  });
 
   $scope.deliberatelyTrustDangerousSnippet = function() {
 	return $sce.trustAsHtml($scope.snippet);

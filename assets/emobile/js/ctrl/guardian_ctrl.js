@@ -52,8 +52,9 @@ app.controller('guardianController', function($rootScope, $scope,$http,$location
 
     $scope.user =   JSON.parse(localStorage.getItem('user'));
     $scope.guardian = JSON.parse(localStorage.getItem('guardian'));
+
     if($scope.guardian == undefined){
-        alert('您没有监护人');
+        swal('您没有监护人');
         return;
     }
 

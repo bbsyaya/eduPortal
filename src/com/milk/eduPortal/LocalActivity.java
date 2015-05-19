@@ -51,7 +51,7 @@ public class LocalActivity extends Activity {
     @Override
     public void onBackPressed() {
 
-        if(webView.getUrl().contains("/#/")){
+        if(webView.getUrl().contains("index.html")){
             finish();
         }
 
