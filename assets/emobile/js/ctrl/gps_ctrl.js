@@ -51,7 +51,23 @@ app.controller('gpsController', function ($rootScope, $scope, $http,$location) {
         });
 
 
+
     $scope.relocateGps = function(){
+        alert(1);
+        if (!navigator.geolocation) {
+            alert('您的手机不支持');
+         return;
+        }
+        navigator.geolocation.getCurrentPosition(function(position){
+            alert(2);
+            var currentLat = position.coords.latitude;
+            var currentLon = position.coords.longitude;
+            alert("currentLat="+currentLat+",currentLon="+currentLon);
+        },function(error){
+            alert(3);
+            alert(error);
+        }); //定位
+
         $("#relocateContainer").html('定位中...');
         var url = 'http://adminapp.online-openday.com/f/edu/gps/locate?uid='+$scope.user.id;
 
@@ -106,3 +122,4 @@ app.controller('loginController', function ($rootScope, $scope, $http) {
             });
     };
 });
+
