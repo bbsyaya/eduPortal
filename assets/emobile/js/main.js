@@ -61,9 +61,8 @@ app.controller('HomeController', function($rootScope, $scope,$http,$location,$ro
   });
 
   $("#home_menu_personal").on('click',function(){
-    Cookies.json = true;
-    //判断是否登录
 
+    //判断是否登录
     if(localStorage.getItem('login')=='true'){//进行报名操作
 
       $scope.user = JSON.parse(localStorage.getItem('user'));
@@ -197,20 +196,15 @@ app.controller('HomeController', function($rootScope, $scope,$http,$location,$ro
       $("#loading").show();
     $http.get('http://adminapp.online-openday.com/f/edu/account/login?loginName='+$scope.loginName+'&password='+$scope.password).
         success(function(data, status, headers, config) {
-
-            $("#loading").hide();
+          $("#loading").hide();
           $scope.login_rs = data;
 
           if($scope.login_rs.rs==true){
               $("#loading").hide();
             //存储用户信息
             localStorage.setItem('login','true');
-            //Cookies.set('login', true, { path: '/'});
               localStorage.setItem('guardian',JSON.stringify($scope.login_rs.guardian));
               localStorage.setItem('user',JSON.stringify($scope.login_rs.euser));
-
-            //Cookies.set('guardian', $scope.login_rs.guardian, { path: '/'});
-            //Cookies.set('user', $scope.login_rs.euser, { path: '/'});
             window.history.back();
 
           }else{
@@ -228,30 +222,30 @@ app.controller('HomeController', function($rootScope, $scope,$http,$location,$ro
 
   $scope.register = function(){
     if($scope.userName == undefined||$scope.userName.trim()==""){
-      alert("请输入用户名");
+      swal("请输入用户名");
       return ;
     }
     if($scope.password == undefined||$scope.password.trim()==""){
-      alert("请输入密码");
+      swal("请输入密码");
       return ;
     }
     if($scope.password2 == undefined||$scope.password2.trim()==""||$scope.password!=$scope.password2.trim()){
-      alert("二次输入的密码不一致");
+      swal("二次输入的密码不一致");
       return ;
     }
     //注册
     $http.post('http://adminapp.online-openday.com/f/edu/account/register?loginName='+$scope.userName+'&password='+$scope.password, {userName:$scope.userName,password:$scope.password}).
         success(function(data, status, headers, config) {
           if(data.rs==true){
-            alert("注册成功");
+            swal("注册成功");
             window.history.go(-1);
           }else{
-            alert(data.msg);
+            swal(data.msg);
           }
 
         }).
         error(function(data, status, headers, config) {
-          alert("注册失败");
+          swal("注册失败");
         });
   };
 

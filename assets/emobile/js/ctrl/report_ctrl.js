@@ -49,9 +49,9 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
 app.controller('listController', function($rootScope, $scope,$http,$routeParams){
 
     $scope.user =   JSON.parse(localStorage.getItem('user'));
-    $scope.guardian = JSON.parse(localStorage.getItem('guardian'));
+    var oGuardian = localStorage.getItem('guardian');
 
-    if($scope.guardian == undefined){
+    if(oGuardian == undefined||oGuardian=='undefined'){
         $("#img").show();
         if($routeParams.id==0){
             $("#img").attr("src","imgs/report_week.jpg");
@@ -65,6 +65,7 @@ app.controller('listController', function($rootScope, $scope,$http,$routeParams)
         return;
     }
 
+    $scope.guardian = JSON.parse(oGuardian);
 
     $("#loading").show();
 	$http.get('http://adminapp.online-openday.com/f/edu/report/list?type='+$routeParams.id).

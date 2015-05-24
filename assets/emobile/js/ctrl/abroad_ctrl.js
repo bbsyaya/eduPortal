@@ -30,22 +30,8 @@ app.config(function($routeProvider) {
 });
 
 app.controller('detailController', function($rootScope, $scope,$http,$routeParams,$cookieStore,$location){
-    Cookies.json = true;
-    $scope.$watch('$viewContentLoaded', function() {
-        $(".modal").hide();
-    });
-
-    $scope.closeEnrollDialog = function(){
-        $(".modal").hide();
-    };
 
 	$scope.abroadId = $routeParams.id;
-
-    if(Cookies.get("login")==true){
-      $scope.user = Cookies.get("user");
-    }else{
-        $scope.user = undefined;
-    }
 
     for(var i=0;i<$rootScope.abroads.length;i++){
         if($rootScope.abroads[i].id == $routeParams.id){
@@ -61,9 +47,9 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
     }
 
   $scope.enroll = function(){
-
-    if(Cookies.get("login")==true){//进行报名操作
-      $scope.user = Cookies.get("user");
+      //判断是否登录
+    if(localStorage.getItem('login')=='true'){//进行报名操作
+        $scope.user = JSON.parse(localStorage.getItem('user'));
 
       $http.get('http://adminapp.online-openday.com/f/edu/abroad/enroll/save?userId='+$scope.user.id+'&abroadId='+$scope.abroadId).
           success(function(data, status, headers, config) {
@@ -71,16 +57,16 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
 
             if($scope.enroll_result==true){
               //将我要报名的文字变成已报名
-                $(".modal").show();
+                swal("报名成功");
               $("#enrollContainer").html("已报名");
               $("#enrollContainer").unbind();
             }else{
-              alert("注册失败");
+              alert("报名失败");
             }
 
           }).
           error(function(data, status, headers, config) {
-            alert("注册失败")
+            alert("报名失败")
           });
 
     }else{//去登录
@@ -92,35 +78,39 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
   $scope.login = function(){
 
     if($scope.loginName==undefined || $scope.loginName==""){
-      alert("请输入用户名");
+        swal("请输入用户名");
       return
     }
 
     if($scope.password==undefined || $scope.password==""){
-      alert("请输入密码");
+        swal("请输入密码");
       return
     }
 
       $http.get('http://adminapp.online-openday.com/f/edu/account/login?loginName='+$scope.loginName+'&password='+$scope.password).
           success(function(data, status, headers, config) {
-            $scope.login_rs = data;
-            if($scope.login_rs.rs==true){
-              //存储用户信息
-              Cookies.set('login', true, { path: '/'});
-              //$cookieStore.put("login",true);
-              //$cookieStore.put("user",$scope.login_rs.euser);
-                Cookies.set('guardian', $scope.login_rs.guardian, { path: '/'});
-                Cookies.set('user', $scope.login_rs.euser, { path: '/'});
-              window.history.back();
 
-            }else{
-              alert("用户名或密码错误");
-                Cookies.put("login",false);
-            }
+              $("#loading").hide();
+              $scope.login_rs = data;
+
+              if($scope.login_rs.rs==true){
+                  $("#loading").hide();
+                  //存储用户信息
+                  localStorage.setItem('login','true');
+                  localStorage.setItem('guardian',JSON.stringify($scope.login_rs.guardian));
+                  localStorage.setItem('user',JSON.stringify($scope.login_rs.euser));
+                  window.history.back();
+
+              }else{
+                  $("#loading").hide();
+                  swal("用户名或密码错误");
+                  localStorage.setItem('login','false');
+              }
 
           }).
           error(function(data, status, headers, config) {
-            alert("登录失败")
+              $("#loading").hide();
+              swal("登录失败")
           });
   };
 

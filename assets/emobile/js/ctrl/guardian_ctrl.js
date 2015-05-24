@@ -51,12 +51,22 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
 app.controller('guardianController', function($rootScope, $scope,$http,$location){
 
     $scope.user =   JSON.parse(localStorage.getItem('user'));
-    $scope.guardian = JSON.parse(localStorage.getItem('guardian'));
-
-    if($scope.guardian == undefined){
-        swal('您没有监护人');
-        return;
+    var oGuardian = localStorage.getItem('guardian');
+    if(oGuardian == undefined||oGuardian=='undefined'){
+        $("#loading").show();
+        $http.get('http://adminapp.online-openday.com/f/edu/account/getGuardian?uid='+$scope.user.id).
+            success(function(data, status, headers, config) {
+                $scope.guardian = data;
+                $("#loading").hide();
+            }).
+            error(function(data, status, headers, config) {
+                $("#loading").hide();
+                swal("登录失败")
+            });
+    }else{
+        $scope.guardian = JSON.parse(oGuardian);
     }
+
 
   $scope.back = function(){
     	window.history.go(-1);
@@ -101,11 +111,14 @@ app.controller('guardianController', function($rootScope, $scope,$http,$location
 app.controller('reportController', function($rootScope, $scope,$http,$location){
 
     $scope.user =   JSON.parse(localStorage.getItem('user'));
-    $scope.guardian = JSON.parse(localStorage.getItem('guardian'));
-    if($scope.guardian == undefined){
-        swal('您没有监护人');
+    var oGuardian = localStorage.getItem('guardian');
+    if(oGuardian == undefined||oGuardian=='undefined'){
+        //swal('您不能查看');
         return;
-    }else{
+    }
+
+    $scope.guardian = JSON.parse(oGuardian);
+
         $("#loading").show();
         //读取报告列表
         $http.get('http://adminapp.online-openday.com/f/edu/reportGuardian?uid='+$scope.guardian.id).
@@ -118,7 +131,6 @@ app.controller('reportController', function($rootScope, $scope,$http,$location){
                 swal("获取失败")
             });
 
-    }
 
 
   $scope.back = function(){
