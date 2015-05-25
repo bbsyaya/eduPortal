@@ -14,73 +14,86 @@ app.filter('trustHtml', function ($sce) {
     }
 });
 
-app.config(function ($routeProvider) {
+app.config(function ($routeProvider,$httpProvider) {
     $routeProvider.when('/', {templateUrl: 'gps.html', controller: 'gpsController', reloadOnSearch: false});
     $routeProvider.when('/login', {templateUrl: 'login.html', controller: 'loginController', reloadOnSearch: false});
+
+    $httpProvider.defaults.transformRequest = function(data){
+        if (data === undefined) {
+            return data;
+        }
+        return $.param(data);
+    }
+    $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 });
 
 app.controller('gpsController', function ($rootScope, $scope, $http,$location) {
 
     //定位当前位置
-
-    if (localStorage.getItem("login") == 'true') {//进行报名操作
+    if (localStorage.getItem("login") == 'true') {
         $scope.user = JSON.parse(localStorage.getItem('user'));
 
+        $("#loading").show();
         $http.get('http://adminapp.online-openday.com/f/edu/gps?uid='+$scope.user.id).
             success(function (data, status, headers, config) {
                 $scope.gpses = data;
-
+                $scope.gpsNow = data[0].location;
+                $("#loading").hide();
             }).
             error(function (data, status, headers, config) {
-
+                $("#loading").hide();
             });
+
+        //$http.get('http://adminapp.online-openday.com/f/edu/gps?uid='+$scope.user.id).
+        //    success(function (data, status, headers, config) {
+        //        alert(data.length);
+        //        $scope.gpses = data;
+        //        $scope.gpsNow = data[0].location;
+        //
+        //    }).
+        //    error(function (data, status, headers, config) {
+        //        alert("获取失败");
+        //    });
+
     }else{
-        $location.path("/login")
+        $location.path("/login");
     }
 
     $scope.back = function () {
         window.history.go(-1);
     };
 
-    //定位
-    $http.get('http://adminapp.online-openday.com/f/edu/gps/locate?uid='+$scope.user.id).
-        success(function (data, status, headers, config) {
-            $scope.gpsNow = data;
-        }).
-        error(function (data, status, headers, config) {
-        });
-
-
 
     $scope.relocateGps = function(){
-        alert(1);
-        if (!navigator.geolocation) {
-            alert('您的手机不支持');
-         return;
-        }
-        navigator.geolocation.getCurrentPosition(function(position){
-            alert(2);
-            var currentLat = position.coords.latitude;
-            var currentLon = position.coords.longitude;
-            alert("currentLat="+currentLat+",currentLon="+currentLon);
-        },function(error){
-            alert(3);
-            alert(error);
-        }); //定位
 
         $("#relocateContainer").html('定位中...');
-        var url = 'http://adminapp.online-openday.com/f/edu/gps/locate?uid='+$scope.user.id;
+        $scope.gpsNow = android.getLocation();
 
-        $http.get(url).
-            success(function (data, status, headers, config) {
+        //var url = 'http://adminapp.online-openday.com/f/edu/gps/locate?uid='+$scope.user.id+"&address="+encodeURIComponent($scope.gpsNow);
+        var postData = {uid:$scope.user.id,address:$scope.gpsNow};
+        var config = {};
+        $http.post('http://adminapp.online-openday.com/f/edu/gps/locate', postData, config
+        ).success(function(data, status, headers, config) {
+                //成功之后做一些事情
                 $scope.gpsNow = data;
                 $("#relocateContainer").html('重新定位');
-                alert('定位成功');
-            }).
-            error(function (data, status, headers, config) {
+                swal('定位成功');
+            }).error(function(data, status, headers, config) {
                 $("#relocateContainer").html('重新定位');
-                alert('定位失败');
+                swal('定位失败');
             });
+
+
+        //$http.get(url).
+        //    success(function (data, status, headers, config) {
+        //        $scope.gpsNow = data;
+        //        $("#relocateContainer").html('重新定位');
+        //        alert('定位成功');
+        //    }).
+        //    error(function (data, status, headers, config) {
+        //        $("#relocateContainer").html('重新定位');
+        //        alert('定位失败');
+        //    });
     };
 
 });
