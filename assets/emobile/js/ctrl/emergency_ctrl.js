@@ -30,7 +30,7 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
         }
     }
 
-	//$http.get('http://adminapp.online-openday.com/f/edu/emergency/get?id='+$routeParams.id).
+	//$http.get('http://182.92.129.8:8025/f/edu/emergency/get?id='+$routeParams.id).
 	//  success(function(data, status, headers, config) {
 	//    $scope.emergency = data;
 	//
@@ -52,7 +52,7 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
 app.controller('emergencyController', function($rootScope, $scope,$http){
     $("#loading").show();
 
-	$http.get('http://adminapp.online-openday.com/f/edu/emergency').
+	$http.get('http://182.92.129.8:8025/f/edu/emergency').
 	  success(function(data, status, headers, config) {
 
             $rootScope.emergencys = data;

@@ -68,7 +68,7 @@ app.controller('listController', function($rootScope, $scope,$http,$routeParams)
     $scope.guardian = JSON.parse(oGuardian);
 
     $("#loading").show();
-	$http.get('http://adminapp.online-openday.com/f/edu/report/list?type='+$routeParams.id).
+	$http.get('http://182.92.129.8:8025/f/edu/report/list?type='+$routeParams.id).
 	  success(function(data, status, headers, config) {
             $("#loading").hide();
           $rootScope.reports = data;

@@ -51,7 +51,7 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
     if(localStorage.getItem('login')=='true'){//进行报名操作
         $scope.user = JSON.parse(localStorage.getItem('user'));
 
-      $http.get('http://adminapp.online-openday.com/f/edu/abroad/enroll/save?userId='+$scope.user.id+'&abroadId='+$scope.abroadId).
+      $http.get('http://182.92.129.8:8025/f/edu/abroad/enroll/save?userId='+$scope.user.id+'&abroadId='+$scope.abroadId).
           success(function(data, status, headers, config) {
             $scope.enroll_result = data;
 
@@ -87,7 +87,7 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
       return
     }
 
-      $http.get('http://adminapp.online-openday.com/f/edu/account/login?loginName='+$scope.loginName+'&password='+$scope.password).
+      $http.get('http://182.92.129.8:8025/f/edu/account/login?loginName='+$scope.loginName+'&password='+$scope.password).
           success(function(data, status, headers, config) {
 
               $("#loading").hide();
@@ -128,7 +128,7 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
             return ;
         }
         //注册
-        $http.post('http://adminapp.online-openday.com/f/edu/account/register?loginName='+$scope.userName+'&password='+$scope.password, {userName:$scope.userName,password:$scope.password}).
+        $http.post('http://182.92.129.8:8025/f/edu/account/register?loginName='+$scope.userName+'&password='+$scope.password, {userName:$scope.userName,password:$scope.password}).
             success(function(data, status, headers, config) {
                 if(data.rs==true){
                     alert("注册成功");
@@ -158,7 +158,7 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
 app.controller('abroadController', function($rootScope, $scope,$http){
     $("#loading").show();
 
-	$http.get('http://adminapp.online-openday.com/f/edu/abroad').
+	$http.get('http://182.92.129.8:8025/f/edu/abroad').
 	  success(function(data, status, headers, config) {
             $rootScope.abroads = data;
             $("#loading").hide();

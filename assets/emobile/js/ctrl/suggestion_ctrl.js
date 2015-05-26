@@ -50,7 +50,7 @@ app.controller('msgController', function($rootScope, $scope,$http,$routeParams){
         }
         $("#loading").show();
         //提交
-        $http.get('http://adminapp.online-openday.com/f/edu/suggestion/save?type='+$routeParams.type+'&title='+$scope.title+'&msg='+$scope.content).
+        $http.get('http://182.92.129.8:8025/f/edu/suggestion/save?type='+$routeParams.type+'&title='+$scope.title+'&msg='+$scope.content).
             success(function(data, status, headers, config) {
                 if(data==true){
                     $("#loading").hide();

@@ -54,7 +54,7 @@ app.controller('guardianController', function($rootScope, $scope,$http,$location
     var oGuardian = localStorage.getItem('guardian');
     if(oGuardian == undefined||oGuardian=='undefined'){
         $("#loading").show();
-        $http.get('http://adminapp.online-openday.com/f/edu/account/getGuardian?uid='+$scope.user.id).
+        $http.get('http://182.92.129.8:8025/f/edu/account/getGuardian?uid='+$scope.user.id).
             success(function(data, status, headers, config) {
                 $scope.guardian = data;
                 $("#loading").hide();
@@ -84,7 +84,7 @@ app.controller('guardianController', function($rootScope, $scope,$http,$location
       return
     }
 
-    $http.get('http://adminapp.online-openday.com/f/edu/account/login?loginName='+$scope.loginName+'&password='+$scope.password).
+    $http.get('http://182.92.129.8:8025/f/edu/account/login?loginName='+$scope.loginName+'&password='+$scope.password).
         success(function(data, status, headers, config) {
           $scope.login_rs = data;
           if($scope.login_rs.rs==true){
@@ -121,7 +121,7 @@ app.controller('reportController', function($rootScope, $scope,$http,$location){
 
         $("#loading").show();
         //读取报告列表
-        $http.get('http://adminapp.online-openday.com/f/edu/reportGuardian?uid='+$scope.guardian.id).
+        $http.get('http://182.92.129.8:8025/f/edu/reportGuardian?uid='+$scope.guardian.id).
             success(function(data, status, headers, config) {
                 $rootScope.reports = data;
                 $("#loading").hide();
@@ -150,7 +150,7 @@ app.controller('reportController', function($rootScope, $scope,$http,$location){
       return
     }
 
-    $http.get('http://adminapp.online-openday.com/f/edu/account/login?loginName='+$scope.loginName+'&password='+$scope.password).
+    $http.get('http://182.92.129.8:8025/f/edu/account/login?loginName='+$scope.loginName+'&password='+$scope.password).
         success(function(data, status, headers, config) {
           $scope.login_rs = data;
           if($scope.login_rs.rs==true){
@@ -183,7 +183,7 @@ app.controller('reportController', function($rootScope, $scope,$http,$location){
       return
     }
 
-    $http.get('http://adminapp.online-openday.com/f/edu/account/login?loginName='+$scope.loginName+'&password='+$scope.password).
+    $http.get('http://182.92.129.8:8025/f/edu/account/login?loginName='+$scope.loginName+'&password='+$scope.password).
         success(function(data, status, headers, config) {
           $scope.login_rs = data;
           if($scope.login_rs.rs==true){
