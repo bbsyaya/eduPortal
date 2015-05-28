@@ -101,7 +101,7 @@ h1 {
 }
 
 .splash_img{
-    background-image: url("../imgs/splash1.png");
+    background-image: url("../imgs/splash1.jpg");
     background-repeat: no-repeat;
     filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
     -moz-background-size:100% 100%;
@@ -109,7 +109,7 @@ h1 {
 }
 
 .setting_img{
-    background-image: url("../imgs/logo_setting.png");
+    background-image: url("../imgs/logo_setting.jpg");
     background-repeat: no-repeat;
     filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
     -moz-background-size:100% 100%;
@@ -117,7 +117,7 @@ h1 {
 }
 
 .personal_img{
-    background-image: url("../imgs/logo_personal.png");
+    background-image: url("../imgs/logo_personal.jpg");
     background-repeat: no-repeat;
     filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
     -moz-background-size:100% 100%;
