@@ -49,6 +49,8 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
 app.controller('listController', function($rootScope, $scope,$http,$routeParams){
 
     $scope.user =   JSON.parse(localStorage.getItem('user'));
+    $scope.type = $routeParams.id;
+
     var oGuardian = localStorage.getItem('guardian');
 
     if(oGuardian == undefined||oGuardian=='undefined'){
