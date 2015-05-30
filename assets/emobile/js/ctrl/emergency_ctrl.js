@@ -24,21 +24,12 @@ app.config(function($routeProvider) {
 app.controller('detailController', function($rootScope, $scope,$http,$routeParams){
 
     for(var i=0;i<$rootScope.emergencys.length;i++){
-        if($rootScope.emergencys[i].id = $routeParams.id){
+        if($rootScope.emergencys[i].id == $routeParams.id){
             $scope.emergency = $rootScope.emergencys[i];
             break;
         }
     }
 
-	//$http.get('http://182.92.129.8:8025/f/edu/emergency/get?id='+$routeParams.id).
-	//  success(function(data, status, headers, config) {
-	//    $scope.emergency = data;
-	//
-  //}).
-  //error(function(data, status, headers, config) {
-	//
-  //});
-  
   $scope.deliberatelyTrustDangerousSnippet = function() {  
 	return $sce.trustAsHtml($scope.snippet);  
   };  
