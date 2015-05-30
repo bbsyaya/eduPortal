@@ -36,6 +36,7 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
     for(var i=0;i<$rootScope.abroads.length;i++){
         if($rootScope.abroads[i].id == $routeParams.id){
             $scope.abroad = $rootScope.abroads[i];
+
             if($scope.abroad.enrollable==0){
                 $("#enrollContainer").hide();
             }else if($scope.abroad.enrolled==true){
@@ -47,9 +48,13 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
     }
 
   $scope.enroll = function(){
+
       //判断是否登录
     if(localStorage.getItem('login')=='true'){//进行报名操作
         $scope.user = JSON.parse(localStorage.getItem('user'));
+        if($scope.abroad.enrolled==true){
+            return;
+        }
 
       $http.get('http://182.92.129.8:8025/f/edu/abroad/enroll/save?userId='+$scope.user.id+'&abroadId='+$scope.abroadId).
           success(function(data, status, headers, config) {
@@ -58,6 +63,7 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
             if($scope.enroll_result==true){
               //将我要报名的文字变成已报名
                 swal("报名成功");
+                $scope.abroad.enrolled=true;
               $("#enrollContainer").html("已报名");
               $("#enrollContainer").unbind();
             }else{
@@ -157,12 +163,18 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
 
 app.controller('abroadController', function($rootScope, $scope,$http){
     $("#loading").show();
-
-	$http.get('http://182.92.129.8:8025/f/edu/abroad').
+    var url = 'http://182.92.129.8:8025/f/edu/abroad';
+    if(localStorage.getItem('login')=='true') {
+        $scope.user = JSON.parse(localStorage.getItem('user'));
+        url += '?uid='+$scope.user.id;
+    }
+	$http.get(url).
 	  success(function(data, status, headers, config) {
             $rootScope.abroads = data;
             $("#loading").hide();
-
+            setTimeout(function () {
+                myScroll.refresh();
+            }, 10);
 	    
   }).
   error(function(data, status, headers, config) {
@@ -173,5 +185,10 @@ app.controller('abroadController', function($rootScope, $scope,$http){
   $scope.back = function(){
     	window.history.go(-1);
     };
-  
+    document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+    var myScroll;
+    $scope.$on('$viewContentLoaded', function() {
+        myScroll = new IScroll('#wrapper', { mouseWheel: true, click: true });
+    });
+
 });
