@@ -40,7 +40,7 @@ app.controller('detailController', function ($rootScope, $scope, $http, $routePa
     for(var i=0;i<$rootScope.teachers.length;i++){
         if($rootScope.teachers[i].id == $routeParams.id){
             $scope.teacher = $rootScope.teachers[i];
-            if ($scope.teacher.gendar == 1) {
+            if ($scope.teacher.gendar == 0) {
                 $("#imgGendar").attr('src', 'imgs/icon_male.png');
                 $("#teacherIcon").attr('src', 'imgs/nan.png');
             }

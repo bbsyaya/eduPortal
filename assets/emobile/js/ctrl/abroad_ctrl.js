@@ -31,6 +31,7 @@ app.config(function($routeProvider) {
 
 app.controller('detailController', function($rootScope, $scope,$http,$routeParams,$cookieStore,$location){
 
+    document.removeEventListener('touchmove',preTouchmove,false);
 	$scope.abroadId = $routeParams.id;
 
     for(var i=0;i<$rootScope.abroads.length;i++){
@@ -185,10 +186,13 @@ app.controller('abroadController', function($rootScope, $scope,$http){
   $scope.back = function(){
     	window.history.go(-1);
     };
-    document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+    document.addEventListener('touchmove', preTouchmove, false);
     var myScroll;
     $scope.$on('$viewContentLoaded', function() {
         myScroll = new IScroll('#wrapper', { mouseWheel: true, click: true });
     });
 
 });
+function preTouchmove(e){
+    e.preventDefault();
+}
