@@ -27,7 +27,6 @@ app.config(function($routeProvider) {
 });
 
 app.controller('detailController', function($rootScope, $scope,$http,$routeParams){
-	$scope.activityId = $routeParams.id;
 
 	for(var i=0;i<$rootScope.conveniences.length;i++){
       if($rootScope.conveniences[i].id == $routeParams.id){

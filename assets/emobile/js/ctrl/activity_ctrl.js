@@ -27,7 +27,7 @@ app.config(function($routeProvider) {
 });
 
 app.controller('detailController', function($rootScope, $scope,$http,$routeParams){
-	$scope.activityId = $routeParams.id;
+    document.removeEventListener('touchmove',preTouchmove,false);
 
     for(var i=0;i<$rootScope.activitys.length;i++){
       if($rootScope.activitys[i].id==$routeParams.id){
@@ -46,12 +46,14 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
 });
 
 app.controller('ActivityController', function($rootScope, $scope,$http){
-  $scope.userAgent = navigator.userAgent;
     $("#loading").show();
 	$http.get('http://182.92.129.8:8025/f/edu/activity').
 	  success(function(data, status, headers, config) {
           $rootScope.activitys = data;
             $("#loading").hide();
+            setTimeout(function () {
+                myScroll.refresh();
+            }, 10);
 	    
   }).
   error(function(data, status, headers, config) {
@@ -62,5 +64,15 @@ app.controller('ActivityController', function($rootScope, $scope,$http){
   $scope.back = function(){
     	window.history.go(-1);
     };
-  
+
+    document.addEventListener('touchmove', preTouchmove, false);
+    var myScroll;
+    $scope.$on('$viewContentLoaded', function() {
+         myScroll = new IScroll('#wrapper', { mouseWheel: true, click: true });
+    });
+
 });
+
+function preTouchmove(e){
+    e.preventDefault();
+}
