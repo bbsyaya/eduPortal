@@ -10,7 +10,7 @@
                 </td>
                 <td width="50%" align="right" style="color:green;">
                     <div class="btn-group pull-right">
-                        <div class='btn' ng-click="relocateGps()">
+                        <div class='btn' ng-click="relocateGpsCMD()">
                             <div id="relocateContainer" style="border: 1px solid #ffffff;height: 30px;width: 80px;line-height: 30px;color: #ffffff;">
                                 重新定位
                             </div>
@@ -39,7 +39,7 @@
                 </tr>
             </table>
 
-            <div style="height: 40px;line-height: 40px;padding-left: 10px;" >
+            <div id="cmd" style="height: 40px;line-height: 40px;padding-left: 10px;" >
                 {{gpsNow }}
             </div>
 
@@ -81,4 +81,21 @@
 
 </div>
 
-	
+	<script>
+        function updateCMD(data) {
+            var userId = JSON.parse(localStorage.getItem('user')).id;
+
+            $.post("http://182.92.129.8:8025/f/edu/gps/locate",
+                    {
+                        uid: userId,
+                        address: data
+                    },
+                    function (data, status) {
+
+                    });
+
+            $("#relocateContainer").html('重新定位');
+            $("#cmd").html(data);
+
+        };
+    </script>

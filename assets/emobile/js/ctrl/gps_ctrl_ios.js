@@ -139,11 +139,11 @@ app.controller('loginController', function ($rootScope, $scope, $http) {
 });
 
 function updateCMD(data) {
-
+    var userId = JSON.parse(localStorage.getItem('user')).id;
     $.post("http://adminapp.online-openday.com/f/edu/gps/locate",
         {
-            uid: JSON.parse(localStorage.getItem('user')).id,
-            address: "data"
+            uid: userId,
+            address: data
         },
         function (data, status) {
 
