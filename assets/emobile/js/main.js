@@ -21,9 +21,9 @@ app.controller('HomeController', function($rootScope, $scope,$http,$location,$ro
   $("#tab_index img").attr('src','imgs/index_selected.png');
   $("#tab_personal img").attr('src','imgs/mine.png');
   $("#tab_setting img").attr('src','imgs/setting.png');
-    $("#tab_index").css('color',"#249c10");
-    $("#tab_personal").css('color',"#000000");
-    $("#tab_setting").css('color',"#000000");
+    $("#tab_index").css('color',"#ffffff");
+    $("#tab_personal").css('color',"#89d97a");
+    $("#tab_setting").css('color',"#89d97a");
 
 
   $scope.back = function(){
@@ -35,9 +35,9 @@ app.controller('HomeController', function($rootScope, $scope,$http,$location,$ro
     $("#tab_index img").attr('src','imgs/index.png');
     $("#tab_setting img").attr('src','imgs/setting.png');
 
-      $("#tab_personal").css('color',"#249c10");
-      $("#tab_index").css('color',"#000000");
-      $("#tab_setting").css('color',"#000000");
+      $("#tab_personal").css('color',"#ffffff");
+      $("#tab_index").css('color',"#89d97a");
+      $("#tab_setting").css('color',"#89d97a");
 
     Cookies.json = true;
     //判断是否登录
@@ -55,9 +55,9 @@ app.controller('HomeController', function($rootScope, $scope,$http,$location,$ro
     $("#tab_setting img").attr('src','imgs/setting_selected.png');
     $("#tab_personal img").attr('src','imgs/mine.png');
     $("#tab_index img").attr('src','imgs/index.png');
-      $("#tab_personal").css('color',"#000000");
-      $("#tab_index").css('color',"#000000");
-      $("#tab_setting").css('color',"#249c10");
+      $("#tab_personal").css('color',"#249c10");
+      $("#tab_index").css('color',"#249c10");
+      $("#tab_setting").css('color',"#ffffff");
 
   });
 
@@ -269,9 +269,9 @@ app.controller('personalController', function($rootScope, $scope,$location){
   $("#tab_personal img").attr('src','imgs/mine_selected.png');
   $("#tab_index img").attr('src','imgs/index.png');
   $("#tab_setting img").attr('src','imgs/setting.png');
-    $("#tab_personal").css('color',"#249c10");
-    $("#tab_index").css('color',"#000000");
-    $("#tab_setting").css('color',"#000000");
+    $("#tab_personal").css('color',"#ffffff");
+    $("#tab_index").css('color',"#89d97a");
+    $("#tab_setting").css('color',"#89d97a");
 
 
   //判断是否已经登录,如果没有登录，则进行登录操作。
@@ -363,9 +363,9 @@ app.controller('settingController', function($rootScope, $scope,$cookieStore,$lo
   $("#tab_personal img").attr('src','imgs/mine.png');
   $("#tab_index img").attr('src','imgs/index.png');
   $("#tab_setting img").attr('src','imgs/setting_selected.png');
-    $("#tab_personal").css('color',"#000000");
-    $("#tab_index").css('color',"#000000");
-    $("#tab_setting").css('color',"#249c10");
+    $("#tab_personal").css('color',"#89d97a");
+    $("#tab_index").css('color',"#89d97a");
+    $("#tab_setting").css('color',"#ffffff");
 
   $scope.logout = function(){
 
