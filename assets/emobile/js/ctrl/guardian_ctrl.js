@@ -68,6 +68,7 @@ app.controller('guardianController', function($rootScope, $scope,$http,$location
     }
 
 
+
   $scope.back = function(){
     	window.history.go(-1);
     };
@@ -109,19 +110,34 @@ app.controller('guardianController', function($rootScope, $scope,$http,$location
 });
 
 app.controller('reportController', function($rootScope, $scope,$http,$location){
-
     $scope.user =   JSON.parse(localStorage.getItem('user'));
-    var oGuardian = localStorage.getItem('guardian');
-    if(oGuardian == undefined||oGuardian=='undefined'){
-        //swal('您不能查看');
-        return;
+    var gid = "";
+
+    //演示帐号
+    if($scope.user.id =='0491ea60d3b74ded8dee3d62fe96e2a1'){
+        gid = '414af5a494b14902a44ec9abbdf84b34';
+    }else{
+        var oGuardian = localStorage.getItem('guardian');
+        $scope.guardian = JSON.parse(oGuardian);
     }
 
-    $scope.guardian = JSON.parse(oGuardian);
+    $scope.user =   JSON.parse(localStorage.getItem('user'));
+
+    //演示帐号
+    if($scope.user.id =='0491ea60d3b74ded8dee3d62fe96e2a1'){
+
+    }else if(oGuardian == undefined||oGuardian=='undefined'){
+        //swal('您不能查看');
+        return;
+    }else{
+        gid = $scope.guardian.id;
+    }
 
         $("#loading").show();
+
+
         //读取报告列表
-        $http.get('http://182.92.129.8:8025/f/edu/reportGuardian?uid='+$scope.guardian.id).
+        $http.get('http://182.92.129.8:8025/f/edu/reportGuardian?uid='+gid).
             success(function(data, status, headers, config) {
                 $rootScope.reports = data;
                 $("#loading").hide();
