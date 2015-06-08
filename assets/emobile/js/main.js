@@ -168,7 +168,6 @@ app.controller('HomeController', function($rootScope, $scope,$http,$location,$ro
 
   $("#home_menu_gps").on('click',function(){
 
-    Cookies.json = true;
     //判断是否登录
 
     if(localStorage.getItem('login')=='true'){//进行报名操作
