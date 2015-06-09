@@ -5,6 +5,14 @@
     <WebView
             android:id="@+id/webView"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"/>
+            android:layout_height="fill_parent"
+            />
+
+    <ImageView
+            android:id="@+id/splashImg"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:src="@drawable/splash0"
+            android:scaleType="fitXY"/>
 
 </RelativeLayout>

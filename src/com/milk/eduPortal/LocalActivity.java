@@ -1,10 +1,15 @@
 package com.milk.eduPortal;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
 import android.webkit.*;
+import android.widget.ImageView;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -19,15 +24,39 @@ public class LocalActivity extends Activity {
     public BDLocationListener myListener = new MyLocationListener();
     private String addr;
 
+    private ImageView splashImg;
+    private Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            splashImg.setVisibility(View.INVISIBLE);
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.activity_main);
 
+        splashImg = (ImageView) findViewById(R.id.splashImg);
         webView = (WebView) findViewById(R.id.webView);
+
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                try {
+                    sleep(2000);
+                    mHandler.sendEmptyMessage(0);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+
+
         init();
 //        webView.loadUrl("file:///android_asset/emobile/index.html#home");
         webView.loadUrl("file:///android_asset/emobile/index.html");
