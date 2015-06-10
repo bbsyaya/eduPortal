@@ -56,7 +56,6 @@ public class LocalActivity extends Activity {
             }
         }.start();
 
-
         init();
 //        webView.loadUrl("file:///android_asset/emobile/index.html#home");
         webView.loadUrl("file:///android_asset/emobile/index.html");
