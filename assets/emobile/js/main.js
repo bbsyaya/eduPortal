@@ -52,11 +52,12 @@ app.controller('HomeController', function($rootScope, $scope,$http,$location,$ro
   });
 
   $("#tab_setting").on('click',function(){
+
     $("#tab_setting img").attr('src','imgs/setting_selected.png');
     $("#tab_personal img").attr('src','imgs/mine.png');
     $("#tab_index img").attr('src','imgs/index.png');
-      $("#tab_personal").css('color',"#249c10");
-      $("#tab_index").css('color',"#249c10");
+      $("#tab_personal").css('color',"#89d97a");
+      $("#tab_index").css('color',"#89d97a");
       $("#tab_setting").css('color',"#ffffff");
 
   });
@@ -358,7 +359,6 @@ app.controller('personalController', function($rootScope, $scope,$location){
 
 
 app.controller('settingController', function($rootScope, $scope,$cookieStore,$location){
-
   $("#tab_personal img").attr('src','imgs/mine.png');
   $("#tab_index img").attr('src','imgs/index.png');
   $("#tab_setting img").attr('src','imgs/setting_selected.png');
