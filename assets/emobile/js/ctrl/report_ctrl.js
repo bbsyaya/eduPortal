@@ -53,7 +53,9 @@ app.controller('listController', function($rootScope, $scope,$http,$routeParams)
 
     var oGuardian = localStorage.getItem('guardian');
 
-    if(oGuardian == undefined||oGuardian=='undefined'){
+    //if(oGuardian == undefined||oGuardian=='undefined'){
+
+    if($scope.user.loginName=='admin'){
         $("#img").show();
         if($routeParams.id==0){
             $("#img").attr("src","imgs/report_week.jpg");
@@ -67,10 +69,11 @@ app.controller('listController', function($rootScope, $scope,$http,$routeParams)
         return;
     }
 
-    $scope.guardian = JSON.parse(oGuardian);
+    //$scope.guardian = JSON.parse(oGuardian);
 
     $("#loading").show();
-	$http.get('http://182.92.129.8:8025/f/edu/report/list?type='+$routeParams.id).
+	$http.get('http://182.92.129.8:8025/f/edu/report/list?type='+$routeParams.id+'&uid='+$scope.user.id).
+	//$http.get('http://172.20.0.79:8080/edu/f/edu/report/list?type=0&uid=0491ea60d3b74ded8dee3d62fe96e2a1').
 	  success(function(data, status, headers, config) {
             $("#loading").hide();
           $rootScope.reports = data;
@@ -79,7 +82,6 @@ app.controller('listController', function($rootScope, $scope,$http,$routeParams)
   error(function(data, status, headers, config) {
             $("#loading").hide();
             swal("数据加载失败");
-
   });
 
   $scope.deliberatelyTrustDangerousSnippet = function() {
