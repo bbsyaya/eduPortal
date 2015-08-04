@@ -51,26 +51,38 @@ app.controller('schoolNewsController', function($rootScope, $scope,$http,$locati
 
   if(localStorage.getItem('login') == 'true'){
     $scope.user = JSON.parse(localStorage.getItem('user'));
-    $scope.schoolName = $scope.user.school.name;
+      if($scope.user.school==null||$scope.user.school==undefined){
+          return;
+      }else{
+          $scope.schoolName = $scope.user.school.name;
+      }
+
+
   }else{
     $location.path("/login")
   }
 
-    $("#loading").show();
-	$http.get('http://182.92.129.8:8025/f/edu/schoolNews?schoolId='+$scope.user.school.id).
-	  success(function(data, status, headers, config) {
-            $("#loading").hide();
-            for(var i=0;i<data.length;i++){
-                if(data[i].img == ''){
-                    data[i].img = "imgs/myschool_default_icon.png";
+    if($scope.user.school==null||$scope.user.school==undefined){
+
+    }else{
+        $("#loading").show();
+        $http.get('http://182.92.129.8:8025/f/edu/schoolNews?schoolId='+$scope.user.school.id).
+            success(function(data, status, headers, config) {
+                $("#loading").hide();
+                for(var i=0;i<data.length;i++){
+                    if(data[i].img == ''){
+                        data[i].img = "imgs/myschool_default_icon.png";
+                    }
                 }
-            }
-            $rootScope.schoolNewses = data;
-	    
-  }).
-  error(function(data, status, headers, config) {
-            $("#loading").hide();
-  });
+                $rootScope.schoolNewses = data;
+
+            }).
+            error(function(data, status, headers, config) {
+                $("#loading").hide();
+            });
+    }
+
+
   
   $scope.back = function(){
       $("#loading").hide();

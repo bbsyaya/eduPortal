@@ -3,11 +3,12 @@
         <!--{{schoolName}}-->
         我的学校
     </div>
-    <div style="position:absolute;height:100%;" ng-click="back()">
+    <!--<div style="position:absolute;height:100%;" ng-click="back()">-->
+    <div style="position:absolute;height:100%;" >
         <table height=100%>
             <tr>
                 <td style="color:white;padding-left: 20px;" >
-                    <img src="imgs/back.png" class="back_arrow" />
+                    <img src="imgs/back.png" class="back_arrow" onclick="javascript:window.history.go(-1);" />
                 </td>
             </tr>
         </table>
