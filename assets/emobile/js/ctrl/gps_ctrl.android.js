@@ -37,7 +37,9 @@ app.controller('gpsController', function ($rootScope, $scope, $http,$location) {
         $http.get('http://182.92.129.8:8025/f/edu/gps?uid='+$scope.user.id).
             success(function (data, status, headers, config) {
                 $scope.gpses = data;
-                $scope.gpsNow = data[0].location;
+                if($scope.gpses.length>0){
+                    $scope.gpsNow = data[0].location;
+                }
                 $("#loading").hide();
             }).
             error(function (data, status, headers, config) {
