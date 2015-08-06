@@ -118,7 +118,8 @@ app.controller('reportController', function($rootScope, $scope,$http,$location){
         gid = '414af5a494b14902a44ec9abbdf84b34';
     }else{
         var oGuardian = localStorage.getItem('guardian');
-        $scope.guardian = JSON.parse(oGuardian);
+        if(oGuardian!=undefined)
+            $scope.guardian = JSON.parse(oGuardian);
     }
 
     $scope.user =   JSON.parse(localStorage.getItem('user'));

@@ -39,7 +39,7 @@ app.controller('sisterController', function($rootScope, $scope,$http){
 		}).
 		error(function(data, status, headers, config) {
             $("#loading").hide();
-            swal("加载失败");
+            swal("网络异常,请重试(network error,please retry)");
 		});
 
 	$rootScope.back = function(){

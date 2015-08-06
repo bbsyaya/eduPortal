@@ -81,7 +81,7 @@ app.controller('listController', function($rootScope, $scope,$http,$routeParams)
   }).
   error(function(data, status, headers, config) {
             $("#loading").hide();
-            swal("数据加载失败");
+            swal("网络异常,请重试(network error,please retry)");
   });
 
   $scope.deliberatelyTrustDangerousSnippet = function() {
