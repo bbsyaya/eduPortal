@@ -15,11 +15,18 @@ app.filter('trustHtml', function ($sce) {
 });
 
 app.config(function ($routeProvider,$httpProvider) {
-    $routeProvider.when('/', {templateUrl: 'aboutus.html', controller: 'mainController', reloadOnSearch: false});
-    $routeProvider.when('/setting_intro', {templateUrl: 'setting_intro.html', controller: 'mainController', reloadOnSearch: false});
-    $routeProvider.when('/setting_service', {templateUrl: 'setting_service.html', controller: 'mainController', reloadOnSearch: false});
-    $routeProvider.when('/setting_manager', {templateUrl: 'setting_manager.html', controller: 'mainController', reloadOnSearch: false});
-    $routeProvider.when('/setting_guard', {templateUrl: 'setting_guard.html', controller: 'mainController', reloadOnSearch: false});
+    $routeProvider.when('/', {templateUrl: 'aboutus.html', controller: 'mainController', reloadOnSearch: false})
+
+    .when('/setting_intro', {templateUrl: 'setting_intro.html', controller: 'mainController', reloadOnSearch: false})
+
+        .when('/setting_service11', {templateUrl: 'setting_services.html', controller: 'mainController', reloadOnSearch: false})
+
+        .when('/setting_manager', {templateUrl: 'setting_manager.html', controller: 'mainController', reloadOnSearch: false})
+
+        .when('/setting_guard', {templateUrl: 'setting_guard.html', controller: 'mainController', reloadOnSearch: false})
+        .otherwise({
+            redirectTo: '/'
+        });
 
     $httpProvider.defaults.transformRequest = function(data){
         if (data === undefined) {

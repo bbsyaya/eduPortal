@@ -359,12 +359,35 @@ app.controller('personalController', function($rootScope, $scope,$location){
 
 
 app.controller('settingController', function($rootScope, $scope,$cookieStore,$location){
+
   $("#tab_personal img").attr('src','imgs/mine.png');
   $("#tab_index img").attr('src','imgs/index.png');
   $("#tab_setting img").attr('src','imgs/setting_selected.png');
     $("#tab_personal").css('color',"#89d97a");
     $("#tab_index").css('color',"#89d97a");
     $("#tab_setting").css('color',"#ffffff");
+
+
+    $("#tab_personal").on('click',function(){
+        $("#tab_personal img").attr('src','imgs/mine_selected.png');
+        $("#tab_index img").attr('src','imgs/index.png');
+        $("#tab_setting img").attr('src','imgs/setting.png');
+
+        $("#tab_personal").css('color',"#ffffff");
+        $("#tab_index").css('color',"#89d97a");
+        $("#tab_setting").css('color',"#89d97a");
+
+        Cookies.json = true;
+        //判断是否登录
+
+        if(localStorage.getItem('login')=='true'){//进行报名操作
+            //$scope.user = Cookies.get("user");
+
+            window.location.href="#/personal";
+        }else{//去登录
+            window.location.href="#/login";
+        }
+    });
 
   $scope.logout = function(){
 
