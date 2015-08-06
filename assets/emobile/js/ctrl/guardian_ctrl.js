@@ -110,6 +110,17 @@ app.controller('guardianController', function($rootScope, $scope,$http,$location
 });
 
 app.controller('reportController', function($rootScope, $scope,$http,$location){
+
+    $scope.back = function(){
+        try{
+            $("#loading").hide();
+        }catch (ex){
+
+        }
+
+        window.history.go(-1);
+    };
+
     $scope.user =   JSON.parse(localStorage.getItem('user'));
     var gid = "";
 
@@ -118,10 +129,10 @@ app.controller('reportController', function($rootScope, $scope,$http,$location){
         gid = '414af5a494b14902a44ec9abbdf84b34';
     }else{
         var oGuardian = localStorage.getItem('guardian');
-        if(oGuardian!=undefined)
+        if(oGuardian!=undefined&&oGuardian!='undefined'&&oGuardian!=null){
             $scope.guardian = JSON.parse(oGuardian);
+        }
     }
-
     $scope.user =   JSON.parse(localStorage.getItem('user'));
 
     //演示帐号
@@ -150,10 +161,7 @@ app.controller('reportController', function($rootScope, $scope,$http,$location){
 
 
 
-  $scope.back = function(){
-      $("#loading").hide();
-    window.history.go(-1);
-  };
+
 
   $scope.login = function(){
 
