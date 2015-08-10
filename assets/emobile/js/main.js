@@ -222,14 +222,14 @@ app.controller('HomeController', function($rootScope, $scope,$http,$location,$ro
 
           }else{
               $("#loading").hide();
-              swal("用户名或密码错误");
+              swal($scope.login_rs.schoolName);
               localStorage.setItem('login','false');
           }
 
         }).
         error(function(data, status, headers, config) {
             $("#loading").hide();
-            swal("登录失败")
+            swal("网络异常(please retry)")
         });
   };
 
