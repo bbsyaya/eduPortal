@@ -80,7 +80,7 @@ app.controller('detailController', function ($rootScope, $scope, $http, $routePa
         }
 
 
-        $http.get('http://182.92.129.8:8025/f/edu/account/login?loginName=' + $scope.loginName + '&password=' + $scope.password).
+        $http.get('http://58.96.190.110:8021/f/edu/account/login?loginName=' + $scope.loginName + '&password=' + $scope.password).
             success(function (data, status, headers, config) {
                 $scope.login_rs = data;
                 if ($scope.login_rs.rs == true) {
@@ -117,7 +117,7 @@ app.controller('detailController', function ($rootScope, $scope, $http, $routePa
             return ;
         }
         //注册
-        $http.post('http://182.92.129.8:8025/f/edu/account/register?loginName='+$scope.userName+'&password='+$scope.password, {userName:$scope.userName,password:$scope.password}).
+        $http.post('http://58.96.190.110:8021/f/edu/account/register?loginName='+$scope.userName+'&password='+$scope.password, {userName:$scope.userName,password:$scope.password}).
             success(function(data, status, headers, config) {
                 if(data.rs==true){
                     alert("注册成功");
@@ -153,7 +153,7 @@ app.controller('msgController', function ($rootScope, $scope, $http) {
         }
 
         //提交请求
-        $http.get('http://182.92.129.8:8025/f/edu/question/save?euser.id=' + $scope.user.id + '&msg=' + $scope.content + '&title=' + $scope.title).
+        $http.get('http://58.96.190.110:8021/f/edu/question/save?euser.id=' + $scope.user.id + '&msg=' + $scope.content + '&title=' + $scope.title).
             success(function (data, status, headers, config) {
                 alert('提交成功');
                 window.history.go(-1);
@@ -170,7 +170,7 @@ app.controller('teacherController', function ($rootScope, $scope, $http) {
 
     $("#loading").show();
     //教师列表
-    $http.get('http://182.92.129.8:8025/f/edu/teacher').
+    $http.get('http://58.96.190.110:8021/f/edu/teacher').
         success(function (data, status, headers, config) {
             $rootScope.teachers = data;
             setTimeout(function () {
@@ -184,7 +184,7 @@ app.controller('teacherController', function ($rootScope, $scope, $http) {
         });
 
     //专业列表
-    $http.get('http://182.92.129.8:8025/f/edu/teacher/majorList').
+    $http.get('http://58.96.190.110:8021/f/edu/teacher/majorList').
         success(function (data, status, headers, config) {
             $scope.majors = data;
             var c = "";
