@@ -66,7 +66,7 @@ app.controller('schoolNewsController', function($rootScope, $scope,$http,$locati
 
     }else{
         $("#loading").show();
-        $http.get('http://58.96.190.110:8021/f/edu/schoolNews?schoolId='+$scope.user.school.id).
+        $http.get('http://182.92.129.8:8025/f/edu/schoolNews?schoolId='+$scope.user.school.id).
             success(function(data, status, headers, config) {
                 $("#loading").hide();
                 for(var i=0;i<data.length;i++){
@@ -101,7 +101,7 @@ app.controller('schoolNewsController', function($rootScope, $scope,$http,$locati
       return
     }
 
-    $http.get('http://58.96.190.110:8021/f/edu/account/login?loginName='+$scope.loginName+'&password='+$scope.password).
+    $http.get('http://182.92.129.8:8025/f/edu/account/login?loginName='+$scope.loginName+'&password='+$scope.password).
         success(function(data, status, headers, config) {
           $scope.login_rs = data;
           if($scope.login_rs.rs==true){

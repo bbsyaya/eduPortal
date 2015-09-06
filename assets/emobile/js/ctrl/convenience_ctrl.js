@@ -48,7 +48,7 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
 app.controller('ConvenienceController', function($rootScope, $scope,$http){
     $("#loading").show();
 
-	$http.get('http://58.96.190.110:8021/f/edu/convenience').
+	$http.get('http://182.92.129.8:8025/f/edu/convenience').
 	  success(function(data, status, headers, config) {
           $rootScope.conveniences = data;
             $("#loading").hide();

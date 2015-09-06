@@ -57,7 +57,7 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
             return;
         }
 
-      $http.get('http://58.96.190.110:8021/f/edu/abroad/enroll/save?userId='+$scope.user.id+'&abroadId='+$scope.abroadId).
+      $http.get('http://182.92.129.8:8025/f/edu/abroad/enroll/save?userId='+$scope.user.id+'&abroadId='+$scope.abroadId).
           success(function(data, status, headers, config) {
             $scope.enroll_result = data;
 
@@ -94,7 +94,7 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
       return
     }
 
-      $http.get('http://58.96.190.110:8021/f/edu/account/login?loginName='+$scope.loginName+'&password='+$scope.password).
+      $http.get('http://182.92.129.8:8025/f/edu/account/login?loginName='+$scope.loginName+'&password='+$scope.password).
           success(function(data, status, headers, config) {
 
               $("#loading").hide();
@@ -135,7 +135,7 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
             return ;
         }
         //注册
-        $http.post('http://58.96.190.110:8021/f/edu/account/register?loginName='+$scope.userName+'&password='+$scope.password, {userName:$scope.userName,password:$scope.password}).
+        $http.post('http://182.92.129.8:8025/f/edu/account/register?loginName='+$scope.userName+'&password='+$scope.password, {userName:$scope.userName,password:$scope.password}).
             success(function(data, status, headers, config) {
                 if(data.rs==true){
                     alert("注册成功");
@@ -164,7 +164,7 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
 
 app.controller('abroadController', function($rootScope, $scope,$http){
     $("#loading").show();
-    var url = 'http://58.96.190.110:8021/f/edu/abroad';
+    var url = 'http://182.92.129.8:8025/f/edu/abroad';
     if(localStorage.getItem('login')=='true') {
         $scope.user = JSON.parse(localStorage.getItem('user'));
         url += '?uid='+$scope.user.id;
