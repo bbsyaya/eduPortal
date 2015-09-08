@@ -56,7 +56,7 @@ app.controller('detailController', function ($rootScope, $scope, $http, $routePa
     };
 
     $scope.msg = function () {
-        alert(Cookies.get("login"));
+        //alert(Cookies.get("login"));
         //判断是否登录
         if (Cookies.get("login") == true) {//进行报名操作
             $scope.user = Cookies.get("user");
