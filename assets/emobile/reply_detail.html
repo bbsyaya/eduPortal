@@ -30,10 +30,14 @@
     <!--时间-->
     <div style="color:gray;">{{reply.createDate | date:'yyyy-MM-dd HH:mm:ss'}}</div>
 
-    <div><hr/></div>
+    <div>
+        <hr/>
+    </div>
     <!--内容-->
     <div>{{reply.msg}}</div>
-    <div><hr/></div>
+    <div>
+        <hr/>
+    </div>
     <!--回复-->
     <div style="color: #999;">回复:</div>
     <article ng-bind-html="reply.reply | trustHtml"></article>

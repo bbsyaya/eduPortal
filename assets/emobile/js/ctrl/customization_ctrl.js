@@ -17,7 +17,7 @@ app.config(function($routeProvider) {
 app.controller('customizationController', function($rootScope, $scope,$http,$routeParams,$location){
 
     $("#loading").show();
-	$http.get('http://182.92.129.8:8025/f/edu/customization').
+	$http.get('http://47.90.52.122:8021/f/edu/customization').
 	  success(function(data, status, headers, config) {
             $("#loading").hide();
             $scope.customizations = data;
@@ -48,7 +48,7 @@ app.controller('msgController', function($rootScope, $scope,$http){
         }
 
         $("#loading").show();
-        $http.get('http://182.92.129.8:8025/f/edu/question/save?euser.id='+$scope.user.id+'&msg='+$scope.content+'&title='+$scope.title).
+        $http.get('http://47.90.52.122:8021/f/edu/question/save?euser.id='+$scope.user.id+'&msg='+$scope.content+'&title='+$scope.title).
             success(function(data, status, headers, config) {
                 $("#loading").hide();
                 if(data==true){

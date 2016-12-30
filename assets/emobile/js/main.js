@@ -137,7 +137,7 @@ app.controller('HomeController', function($rootScope, $scope,$http,$location,$ro
   });
   //名校推荐
   $("#home_menu_school").on('touchstart',function(){
-    $("#home_menu_school").css('background-image','url("imgs/menu_school_pressed.png")');
+    $("#home_menu_school").css('background-image','url( "imgs/menu_school_pressed.png")');
   });
 
   $("#home_menu_school").on('touchend',function(){
@@ -207,7 +207,7 @@ app.controller('HomeController', function($rootScope, $scope,$http,$location,$ro
     }
 
       $("#loading").show();
-    $http.get('http://182.92.129.8:8025/f/edu/account/login?loginName='+$scope.loginName+'&password='+$scope.password).
+    $http.get('http://47.90.52.122:8021/f/edu/account/login?loginName='+$scope.loginName+'&password='+$scope.password).
         success(function(data, status, headers, config) {
           $("#loading").hide();
           $scope.login_rs = data;
@@ -247,7 +247,7 @@ app.controller('HomeController', function($rootScope, $scope,$http,$location,$ro
       return ;
     }
     //注册
-    $http.post('http://182.92.129.8:8025/f/edu/account/register?loginName='+$scope.userName+'&password='+$scope.password, {userName:$scope.userName,password:$scope.password}).
+    $http.post('http://47.90.52.122:8021/f/edu/account/register?loginName='+$scope.userName+'&password='+$scope.password, {userName:$scope.userName,password:$scope.password}).
         success(function(data, status, headers, config) {
           if(data.rs==true){
             swal("注册成功");

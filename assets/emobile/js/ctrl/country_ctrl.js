@@ -32,7 +32,7 @@ app.controller('schoolController', function($rootScope, $scope,$http,$routeParam
     $("#loading").show();
 	$scope.activityId = $routeParams.id;
 	$scope.country = $routeParams.country;
-	$http.get('http://182.92.129.8:8025/f/edu/school/getByCountryId?id='+$routeParams.id).
+	$http.get('http://47.90.52.122:8021/f/edu/school/getByCountryId?id='+$routeParams.id).
 	  success(function(data, status, headers, config) {
           $rootScope.schools = data;
             $("#loading").hide();
@@ -98,7 +98,7 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
 app.controller('countryController', function($rootScope, $scope,$http){
 
 
-	$http.get('http://182.92.129.8:8025/f/edu/country').
+	$http.get('http://47.90.52.122:8021/f/edu/country').
 	  success(function(data, status, headers, config) {
 
 	    $scope.countrys = data;
