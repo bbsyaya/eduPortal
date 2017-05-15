@@ -89,7 +89,7 @@
     function updateCMD(data) {
         var userId = JSON.parse(localStorage.getItem('user')).id;
 
-        $.post(" http://app.studyingam.com/f/edu/gps/locate",
+        $.post("http://app.studyingam.com/f/edu/gps/locate",
                 {
                     uid: userId,
                     address: data

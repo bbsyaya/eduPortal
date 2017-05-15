@@ -17,7 +17,7 @@ app.config(function($routeProvider) {
 app.controller('customizationController', function($rootScope, $scope,$http,$routeParams,$location){
 
     $("#loading").show();
-	$http.get(' http://app.studyingam.com/f/edu/customization').
+	$http.get('http://app.studyingam.com/f/edu/customization').
 	  success(function(data, status, headers, config) {
             $("#loading").hide();
             $scope.customizations = data;
@@ -48,7 +48,7 @@ app.controller('msgController', function($rootScope, $scope,$http){
         }
 
         $("#loading").show();
-        $http.get(' http://app.studyingam.com/f/edu/question/save?euser.id='+$scope.user.id+'&msg='+$scope.content+'&title='+$scope.title).
+        $http.get('http://app.studyingam.com/f/edu/question/save?euser.id='+$scope.user.id+'&msg='+$scope.content+'&title='+$scope.title).
             success(function(data, status, headers, config) {
                 $("#loading").hide();
                 if(data==true){

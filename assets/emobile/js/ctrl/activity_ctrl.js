@@ -47,7 +47,7 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
 
 app.controller('ActivityController', function($rootScope, $scope,$http){
     $("#loading").show();
-	$http.get(' http://app.studyingam.com/f/edu/activity').
+	$http.get('http://app.studyingam.com/f/edu/activity').
 	  success(function(data, status, headers, config) {
           $rootScope.activitys = data;
             $("#loading").hide();

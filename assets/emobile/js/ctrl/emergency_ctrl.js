@@ -43,7 +43,7 @@ app.controller('detailController', function($rootScope, $scope,$http,$routeParam
 app.controller('emergencyController', function($rootScope, $scope,$http){
     $("#loading").show();
 
-	$http.get(' http://app.studyingam.com/f/edu/emergency').
+	$http.get('http://app.studyingam.com/f/edu/emergency').
 	  success(function(data, status, headers, config) {
 
             $rootScope.emergencys = data;
