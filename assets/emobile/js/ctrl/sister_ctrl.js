@@ -32,7 +32,7 @@ app.config(function($routeProvider) {
 app.controller('sisterController', function($rootScope, $scope,$http){
     $("#loading").show();
 	//教师列表
-	$http.get('http://47.90.52.122:8021/f/edu/sister').
+	$http.get(' http://app.studyingam.com/f/edu/sister').
 		success(function(data, status, headers, config) {
             $("#loading").hide();
 			$rootScope.sisters = data;
@@ -81,7 +81,7 @@ app.controller('msgController', function($rootScope, $scope,$http,$location,$rou
 		}
 
 		//提交请求
-		$http.get('http://47.90.52.122:8021/f/edu/question/save?euser.id='+$scope.user.id+'&msg='+$scope.content+'&title='+$scope.title).
+		$http.get(' http://app.studyingam.com/f/edu/question/save?euser.id='+$scope.user.id+'&msg='+$scope.content+'&title='+$scope.title).
 	  	success(function(data, status, headers, config) {
 			if(data==true){
                 swal('提交成功');

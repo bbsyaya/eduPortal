@@ -34,7 +34,7 @@ app.controller('gpsController', function ($rootScope, $scope, $http,$location) {
         $scope.user = JSON.parse(localStorage.getItem('user'));
 
         $("#loading").show();
-        $http.get('http://47.90.52.122:8021/f/edu/gps?uid='+$scope.user.id).
+        $http.get(' http://app.studyingam.com/f/edu/gps?uid='+$scope.user.id).
             success(function (data, status, headers, config) {
                 $scope.gpses = data;
                 if($scope.gpses.length>0){
@@ -46,7 +46,7 @@ app.controller('gpsController', function ($rootScope, $scope, $http,$location) {
                 $("#loading").hide();
             });
 
-        //$http.get('http://47.90.52.122:8021/f/edu/gps?uid='+$scope.user.id).
+        //$http.get(' http://app.studyingam.com/f/edu/gps?uid='+$scope.user.id).
         //    success(function (data, status, headers, config) {
         //        alert(data.length);
         //        $scope.gpses = data;
@@ -71,10 +71,10 @@ app.controller('gpsController', function ($rootScope, $scope, $http,$location) {
         $("#relocateContainer").html('定位中...');
         $scope.gpsNow = android.getLocation();
 
-        //var url = 'http://47.90.52.122:8021/f/edu/gps/locate?uid='+$scope.user.id+"&address="+encodeURIComponent($scope.gpsNow);
+        //var url = ' http://app.studyingam.com/f/edu/gps/locate?uid='+$scope.user.id+"&address="+encodeURIComponent($scope.gpsNow);
         var postData = {uid:$scope.user.id,address:$scope.gpsNow};
         var config = {};
-        $http.post('http://47.90.52.122:8021/f/edu/gps/locate', postData, config
+        $http.post(' http://app.studyingam.com/f/edu/gps/locate', postData, config
         ).success(function(data, status, headers, config) {
                 //成功之后做一些事情
                 $scope.gpsNow = data;
@@ -114,7 +114,7 @@ app.controller('loginController', function ($rootScope, $scope, $http) {
             return
         }
 
-        $http.get('http://47.90.52.122:8021/f/edu/account/login?loginName=' + $scope.loginName + '&password=' + $scope.password).
+        $http.get(' http://app.studyingam.com/f/edu/account/login?loginName=' + $scope.loginName + '&password=' + $scope.password).
             success(function (data, status, headers, config) {
                 $scope.login_rs = data;
                 if ($scope.login_rs.rs == true) {

@@ -50,7 +50,7 @@ app.controller('msgController', function($rootScope, $scope,$http,$routeParams){
         }
         $("#loading").show();
         //提交
-        $http.get('http://47.90.52.122:8021/f/edu/suggestion/save?type='+$routeParams.type+'&title='+$scope.title+'&msg='+$scope.content).
+        $http.get(' http://app.studyingam.com/f/edu/suggestion/save?type='+$routeParams.type+'&title='+$scope.title+'&msg='+$scope.content).
             success(function(data, status, headers, config) {
                 if(data==true){
                     $("#loading").hide();

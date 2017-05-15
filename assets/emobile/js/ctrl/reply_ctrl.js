@@ -51,7 +51,7 @@ app.controller('replyController', function ($rootScope, $scope, $http) {
     $("#loading").show();
     $scope.user = JSON.parse(localStorage.getItem('user'));
 
-    $http.get('http://47.90.52.122:8021/f/edu/question?uid='+$scope.user.id).
+    $http.get(' http://app.studyingam.com/f/edu/question?uid='+$scope.user.id).
         success(function (data, status, headers, config) {
             $("#loading").hide();
             $rootScope.replies = data.questions;
@@ -88,7 +88,8 @@ app.controller('msgController', function($rootScope, $scope,$http,$location,$rou
         }
 
         //提交请求
-        $http.get('http://47.90.52.122:8021/f/edu/question/save?euser.id='+$scope.user.id+'&msg='+$scope.content+'&title='+$scope.title).
+        //$http.get('http://47.90.52.122:8021/f/edu/question/save?euser.id='+$scope.user.id+'&msg='+$scope.content+'&title='+$scope.title).
+        $http.get(' http://app.studyingam.com/f/edu/question/save?euser.id='+$scope.user.id+'&msg='+$scope.content+'&title='+$scope.title).
             success(function(data, status, headers, config) {
                 if(data==true){
                     alert('提交成功');
